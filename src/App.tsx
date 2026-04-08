@@ -35,6 +35,7 @@ export default function App() {
   
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const reportRef = useRef<HTMLDivElement>(null);
 
@@ -238,25 +239,52 @@ export default function App() {
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#EAEAEA]">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center border border-[#EAEAEA]">
+        <div className="container mx-auto px-6 md:px-10 lg:px-12 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-9 h-9 rounded overflow-hidden flex items-center justify-center border border-[#EAEAEA]">
               <img src="https://pbs.twimg.com/profile_images/2039012305313099776/U1Xq-_lh_400x400.jpg" alt="Redline Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-black">REDLINE</span>
+            <span className="text-xl md:text-2xl font-bold tracking-tight text-black">RED<span className="text-[#FF2D2D]">LINE</span></span>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+          <nav className="hidden lg:flex items-center gap-10 text-sm font-medium text-gray-600">
             <a href="#" className="hover:text-black transition-colors">Platform</a>
             <a href="#" className="hover:text-black transition-colors">Analysis</a>
             <a href="#" className="hover:text-black transition-colors">Compare</a>
             <a href="#" className="hover:text-black transition-colors">Pricing</a>
             <a href="#" className="hover:text-black transition-colors">Research</a>
           </nav>
-          <div className="flex items-center gap-3">
-            <button className="text-sm font-medium text-gray-600 hover:text-black px-3 py-2">Sign in</button>
-            <button className="text-sm font-bold bg-[#FF2D2D] text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Get access</button>
+          <div className="hidden lg:flex items-center gap-4 md:gap-6">
+            <button className="text-sm font-medium text-gray-600 hover:text-black px-2 py-2">Sign in</button>
+            <button className="text-sm font-bold bg-[#FF2D2D] text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors">Get access</button>
           </div>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="lg:hidden p-2 text-gray-600 hover:text-black"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-[#EAEAEA] shadow-lg flex flex-col py-4 px-6 gap-4">
+            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Platform</a>
+            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Analysis</a>
+            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Compare</a>
+            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Pricing</a>
+            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Research</a>
+            <div className="flex flex-col gap-3 mt-2">
+              <button className="w-full text-center text-base font-medium text-gray-800 py-3 border border-gray-200 rounded-md">Sign in</button>
+              <button className="w-full text-center text-base font-bold bg-[#FF2D2D] text-white py-3 rounded-md">Get access</button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Ticker Bar */}
@@ -524,6 +552,33 @@ export default function App() {
                     <div className="w-10 h-10 rounded-full border-2 border-[#FF2D2D] text-[#FF2D2D] flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-red-50">4</div>
                     <h4 className="font-bold text-black mb-2">Institutional Output</h4>
                     <p className="text-sm text-gray-600 leading-relaxed">Receive a structured, sell-side quality note ready for your investment memo. Exportable as PDF in one click.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* About the Founder */}
+            <section className="py-24 bg-white border-t border-[#EAEAEA]">
+              <div className="container mx-auto px-6 max-w-5xl">
+                <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                  <div className="w-48 h-48 md:w-64 md:h-64 shrink-0 relative">
+                    <div className="absolute inset-0 bg-[#FF2D2D] rounded-full translate-x-3 translate-y-3"></div>
+                    <img 
+                      src="https://media.licdn.com/dms/image/v2/D5603AQHIH-ojNtjaTQ/profile-displayphoto-shrink_800_800/B56Zv3banFIcAc-/0/1769382719512?e=1777507200&v=beta&t=Yt4I9ctbV-wTL5x7u1AV0DaCVSsT0RgcTyM0y5i8N_8" 
+                      alt="Justin Silverman" 
+                      className="w-full h-full object-cover rounded-full relative z-10 border-4 border-white shadow-xl"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="text-[10px] font-bold tracking-[0.15em] text-[#FF2D2D] uppercase mb-4">About the Founder</div>
+                    <h3 className="text-3xl md:text-4xl font-extrabold text-black mb-6 tracking-tight">Justin Silverman</h3>
+                    <blockquote className="text-xl md:text-2xl text-gray-800 italic leading-relaxed mb-6 border-l-4 border-[#FF2D2D] pl-6 py-2 font-medium">
+                      "You want to see my arm, chief? That's my arm right there, chiefy"
+                    </blockquote>
+                    <p className="text-base text-gray-500 leading-relaxed max-w-lg mx-auto md:mx-0">
+                      Building Redline to bring institutional-grade financial intelligence to everyone. Focused on cutting through the noise of SEC filings to deliver high-signal, actionable insights.
+                    </p>
                   </div>
                 </div>
               </div>
