@@ -309,38 +309,41 @@ export default function App() {
         {!selectedCompany ? (
           <>
             {/* Hero Section */}
-            <section className="pt-24 pb-20 px-6 flex flex-col items-center text-center max-w-4xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 mb-8">
-                <div className="w-2 h-2 rounded-full bg-[#FF2D2D] animate-pulse"></div>
-                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase">SEC EDGAR · LIVE FILING INTELLIGENCE</span>
+            <section className="pt-20 pb-16 px-10 text-center bg-white">
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#FF2D2D] bg-[#fff0f0] border border-[#ffd5d5] px-3 py-1.5 rounded-full mb-6">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FF2D2D] animate-pulse"></div>
+                SEC EDGAR · Live Filing Intelligence
               </div>
               
-              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter mb-6 leading-[1.05]">
-                <span className="block text-black">Institutional-Grade</span>
-                <span className="block text-[#FF2D2D]">Financial Intelligence</span>
+              <h1 className="text-[52px] font-bold tracking-[-2px] leading-[1.08] text-[#0a0a0a] mb-5 max-w-[680px] mx-auto">
+                Institutional-Grade<br/>
+                <em className="not-italic text-[#FF2D2D]">Financial Intelligence</em>
               </h1>
               
-              <p className="text-base text-gray-500 mb-12 max-w-2xl font-medium">
+              <p className="text-[17px] text-[#555] leading-[1.65] max-w-[520px] mx-auto mb-9 font-normal">
                 Redline integrates directly with SEC EDGAR to deliver high-signal, insight-dense analysis of 10-K and 10-Q filings in under 60 seconds.
               </p>
               
-              <div className="w-full max-w-2xl relative mb-6">
-                <div className="relative flex items-center">
-                  <Search className="absolute left-5 w-5 h-5 text-gray-400" />
-                  <input 
-                    type="text"
-                    placeholder="Search company or ticker — e.g. PYPL, Stripe, Visa..."
-                    className="w-full h-14 pl-14 pr-32 bg-white text-black placeholder:text-gray-400 border border-gray-200 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] shadow-sm"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button className="absolute right-1.5 h-11 px-6 bg-[#FF2D2D] hover:bg-red-600 text-white font-bold rounded-md transition-colors">
-                    Analyze
-                  </button>
+              <div className="max-w-[600px] mx-auto mb-4 relative">
+                <div className="absolute left-[18px] top-1/2 -translate-y-1/2 text-[#999] pointer-events-none">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                    <circle cx="7.5" cy="7.5" r="5.5" stroke="#aaa" strokeWidth="1.5"/>
+                    <path d="M13 13L11.5 11.5" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </div>
+                <input 
+                  type="text"
+                  placeholder="Search company or ticker — e.g. PYPL, Stripe, Visa..."
+                  className="w-full py-4 pl-12 pr-[120px] text-[15px] font-normal text-[#0a0a0a] bg-white border-[1.5px] border-[#e0e0e0] rounded-[14px] outline-none shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all focus:border-[#FF2D2D] focus:shadow-[0_0_0_4px_rgba(204,0,0,0.08)] placeholder:text-[#aaa]"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#FF2D2D] text-white border-none py-[9px] px-[18px] rounded-[9px] text-[13px] font-semibold cursor-pointer transition-all hover:bg-[#bb0000]">
+                  Analyze
+                </button>
                 
                 {isSearching && (
-                  <div className="absolute right-32 top-1/2 -translate-y-1/2">
+                  <div className="absolute right-28 top-1/2 -translate-y-1/2">
                     <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
                   </div>
                 )}
@@ -365,35 +368,52 @@ export default function App() {
                 )}
               </div>
               
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 flex-wrap mb-16">
+                <span className="text-[12px] text-[#999]">Try:</span>
                 {['PayPal', 'NVDA', 'Block Inc', 'Visa', 'Shopify', 'Adyen'].map(chip => (
-                  <button key={chip} className="px-4 py-1.5 rounded-full border border-[#EAEAEA] text-sm font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                  <button 
+                    key={chip} 
+                    onClick={() => setSearchQuery(chip)}
+                    className="text-[12px] text-[#555] bg-[#f5f5f5] border border-[#e8e8e8] py-1 px-3 rounded-full cursor-pointer transition-all font-medium hover:bg-[#fff0f0] hover:text-[#FF2D2D] hover:border-[#ffd5d5]"
+                  >
                     {chip}
                   </button>
                 ))}
               </div>
             </section>
 
-            {/* 3-Column Feature Strip */}
-            <section className="py-20 border-t border-[#EAEAEA] bg-white">
-              <div className="container mx-auto px-6 max-w-6xl">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                  <div>
-                    <Zap className="w-6 h-6 text-black mb-4" />
-                    <h3 className="text-xs font-bold text-[#FF2D2D] tracking-widest uppercase mb-2">Speed to Insight</h3>
-                    <p className="text-gray-500 leading-relaxed">Bypass manual document parsing. Redline reads 100+ page filings in seconds, instantly surfacing the exact metrics and narrative shifts that matter.</p>
-                  </div>
-                  <div>
-                    <Target className="w-6 h-6 text-black mb-4" />
-                    <h3 className="text-xs font-bold text-[#FF2D2D] tracking-widest uppercase mb-2">Signal Over Noise</h3>
-                    <p className="text-gray-500 leading-relaxed">Our AI is trained to ignore boilerplate risk factors and focus exclusively on true deltas—what actually changed quarter-over-quarter.</p>
-                  </div>
-                  <div>
-                    <Layers className="w-6 h-6 text-black mb-4" />
-                    <h3 className="text-xs font-bold text-[#FF2D2D] tracking-widest uppercase mb-2">Deep Context</h3>
-                    <p className="text-gray-500 leading-relaxed">We don't just extract numbers. We analyze MD&A tone, footnote adjustments, and forward guidance to provide a complete institutional picture.</p>
-                  </div>
+            {/* Value Strip */}
+            <section className="flex justify-center gap-0 border-y border-[#f0f0f0] bg-[#fafafa] p-0 flex-col md:flex-row">
+              <div className="flex-1 max-w-none md:max-w-[260px] p-7 text-center border-b md:border-b-0 md:border-r border-[#f0f0f0] last:border-0">
+                <div className="w-9 h-9 mx-auto mb-2.5 bg-white border border-[#f0f0f0] rounded-[10px] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="7" stroke="#d00" strokeWidth="1.5"/>
+                    <path d="M9 5v4l2.5 2.5" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </div>
+                <div className="text-[11px] font-bold text-[#FF2D2D] tracking-[0.04em] mb-1 uppercase">Speed to Insight</div>
+                <div className="text-[13px] text-[#666] leading-[1.5]">Full filing analysis delivered in under 60 seconds, start to finish</div>
+              </div>
+              <div className="flex-1 max-w-none md:max-w-[260px] p-7 text-center border-b md:border-b-0 md:border-r border-[#f0f0f0] last:border-0">
+                <div className="w-9 h-9 mx-auto mb-2.5 bg-white border border-[#f0f0f0] rounded-[10px] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M3 14l4-6 3 3 3-5 3 4" stroke="#d00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="text-[11px] font-bold text-[#FF2D2D] tracking-[0.04em] mb-1 uppercase">Signal over Noise</div>
+                <div className="text-[13px] text-[#666] leading-[1.5]">Only what actually changed — no filler, no obvious observations</div>
+              </div>
+              <div className="flex-1 max-w-none md:max-w-[260px] p-7 text-center border-b md:border-b-0 md:border-r border-[#f0f0f0] last:border-0">
+                <div className="w-9 h-9 mx-auto mb-2.5 bg-white border border-[#f0f0f0] rounded-[10px] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="3" y="3" width="5" height="5" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                    <rect x="10" y="3" width="5" height="5" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                    <rect x="3" y="10" width="5" height="5" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                    <rect x="10" y="10" width="5" height="5" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                  </svg>
+                </div>
+                <div className="text-[11px] font-bold text-[#FF2D2D] tracking-[0.04em] mb-1 uppercase">Deep Context</div>
+                <div className="text-[13px] text-[#666] leading-[1.5]">MD&A, footnotes, tone shifts — the full picture, not just the numbers</div>
               </div>
             </section>
 
@@ -526,32 +546,105 @@ export default function App() {
             <section className="py-24 bg-gray-50 border-t border-[#EAEAEA]">
               <div className="container mx-auto px-6 max-w-6xl">
                 <div className="mb-16 text-center">
-                  <h2 className="text-3xl font-extrabold text-black tracking-tight">From EDGAR to insight in four steps</h2>
+                  <div className="text-[11px] font-bold tracking-[0.1em] text-[#FF2D2D] uppercase mb-3">How It Works</div>
+                  <h2 className="text-4xl font-bold text-black tracking-tight leading-tight">From EDGAR to insight<br/>in four steps</h2>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">1</div>
-                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
-                    <h4 className="font-bold text-black mb-2">Direct EDGAR Integration</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">No manual downloads. Redline pulls full-text 10-K and 10-Q filings directly from the SEC EDGAR database in real-time.</p>
+                <div className="flex flex-col md:flex-row items-start gap-0 mt-12 relative">
+                  <div className="flex-1 text-center relative px-4 w-full md:w-auto mb-10 md:mb-0">
+                    <div className="w-12 h-12 bg-white border-2 border-[#EAEAEA] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 text-xl font-extrabold text-[#FF2D2D]">
+                      1
+                      <div className="hidden md:block absolute top-1/2 left-full w-[calc(100%+2rem)] h-[2px] -translate-y-1/2 -z-10" style={{ background: 'linear-gradient(90deg, #d00 0%, #e0e0e0 100%)' }}></div>
+                    </div>
+                    <h4 className="text-[13px] font-bold text-black mb-1.5">Search & Select</h4>
+                    <p className="text-xs text-gray-500 leading-relaxed max-w-[200px] mx-auto">Enter any company name or ticker. Redline queries SEC EDGAR in real-time and surfaces all 10-K and 10-Q filings.</p>
                   </div>
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">2</div>
-                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
-                    <h4 className="font-bold text-black mb-2">Configure Parameters</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">Select your analysis focus areas—revenue, margins, MD&A, risk factors, guidance signals, and segment performance.</p>
+                  <div className="flex-1 text-center relative px-4 w-full md:w-auto mb-10 md:mb-0">
+                    <div className="w-12 h-12 bg-white border-2 border-[#EAEAEA] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 text-xl font-extrabold text-[#FF2D2D]">
+                      2
+                      <div className="hidden md:block absolute top-1/2 left-full w-[calc(100%+2rem)] h-[2px] -translate-y-1/2 -z-10" style={{ background: 'linear-gradient(90deg, #d00 0%, #e0e0e0 100%)' }}></div>
+                    </div>
+                    <h4 className="text-[13px] font-bold text-black mb-1.5">Configure Filters</h4>
+                    <p className="text-xs text-gray-500 leading-relaxed max-w-[200px] mx-auto">Select your analysis focus areas — revenue, margins, MD&A, risk factors, guidance signals, and more.</p>
                   </div>
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">3</div>
-                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
-                    <h4 className="font-bold text-black mb-2">Signal-First Processing</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">The full filing is sent to Claude for deep analysis. GPT-4 generates tailored prompts, isolating true deltas and ignoring boilerplate.</p>
+                  <div className="flex-1 text-center relative px-4 w-full md:w-auto mb-10 md:mb-0">
+                    <div className="w-12 h-12 bg-white border-2 border-[#EAEAEA] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 text-xl font-extrabold text-[#FF2D2D]">
+                      3
+                      <div className="hidden md:block absolute top-1/2 left-full w-[calc(100%+2rem)] h-[2px] -translate-y-1/2 -z-10" style={{ background: 'linear-gradient(90deg, #d00 0%, #e0e0e0 100%)' }}></div>
+                    </div>
+                    <h4 className="text-[13px] font-bold text-black mb-1.5">AI Analysis</h4>
+                    <p className="text-xs text-gray-500 leading-relaxed max-w-[200px] mx-auto">The full filing is sent to Claude for deep analysis. GPT-4 generates tailored prompts based on your filter configuration.</p>
                   </div>
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full border-2 border-[#FF2D2D] text-[#FF2D2D] flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-red-50">4</div>
-                    <h4 className="font-bold text-black mb-2">Institutional Output</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">Receive a structured, sell-side quality note ready for your investment memo. Exportable as PDF in one click.</p>
+                  <div className="flex-1 text-center relative px-4 w-full md:w-auto">
+                    <div className="w-12 h-12 bg-[#fff0f0] border-2 border-[#FF2D2D] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 text-xl font-extrabold text-[#FF2D2D]">
+                      4
+                    </div>
+                    <h4 className="text-[13px] font-bold text-black mb-1.5">Institutional Report</h4>
+                    <p className="text-xs text-gray-500 leading-relaxed max-w-[200px] mx-auto">A structured, sell-side quality report is rendered in-browser — exportable as PDF in one click.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-16">
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 10h14M10 3v14" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">Direct EDGAR Integration</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">No manual downloads. Redline pulls full-text 10-K and 10-Q filings directly from the SEC EDGAR database in real-time.</p>
+                  </div>
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="7" stroke="#d00" strokeWidth="1.5"/>
+                        <path d="M10 7v3l2 2" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">Sub-60 Second Analysis</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">100+ page filings analyzed and structured into decision-grade reports in under a minute. Executive summary always first.</p>
+                  </div>
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="5" width="14" height="10" rx="2" stroke="#d00" strokeWidth="1.5"/>
+                        <path d="M7 10h6M7 13h4" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">MD&A & Footnote Analysis</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">Beyond the numbers — Redline reads management tone shifts, disclosure language changes, and footnote anomalies that signal risk.</p>
+                  </div>
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 15L10 5l5 10" stroke="#d00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M7 12h6" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">Signal-First Output</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">No generic summaries. Every sentence earns its place — precise, opinionated analysis grounded in disclosed evidence.</p>
+                  </div>
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="6" height="6" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                        <rect x="11" y="3" width="6" height="6" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                        <rect x="3" y="11" width="6" height="6" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                        <rect x="11" y="11" width="6" height="6" rx="1.5" stroke="#d00" strokeWidth="1.5"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">Multi-Filing Comparison</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">Compare any two filings — same company across periods or head-to-head peers. Structured deltas and strategic divergence surfaced automatically.</p>
+                  </div>
+                  <div className="bg-white border border-[#ebebeb] rounded-xl p-6 transition-all hover:border-[#FF2D2D] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(204,0,0,0.08)]">
+                    <div className="w-10 h-10 bg-[#fff0f0] rounded-lg flex items-center justify-center mb-3.5">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 16l3-3 3 3 3-4 3 4" stroke="#d00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M4 4h12" stroke="#d00" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                    <h4 className="text-[15px] font-bold text-black mb-1.5">PDF Export</h4>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">Every report exports as a clean, institutional-quality PDF — ready for distribution, client decks, or internal research files.</p>
                   </div>
                 </div>
               </div>
