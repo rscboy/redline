@@ -236,22 +236,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col">
-      {/* Ticker Bar */}
-      <div className="w-full bg-black text-white text-xs font-mono py-2 overflow-hidden whitespace-nowrap border-b border-black">
-        <div className="inline-block animate-marquee">
-          <span className="mx-4">NVDA 10-Q Q3 2024 <span className="text-green-400">▲ Gross Margin +8.4pp</span></span>
-          <span className="mx-4">PYPL 10-Q Q2 2024 <span className="text-red-400">▼ Take Rate −14bps</span></span>
-          <span className="mx-4">SQ 10-K 2023 <span className="text-green-400">▲ GPV +12%</span></span>
-          <span className="mx-4">SHOP 10-Q Q1 2024 <span className="text-green-400">▲ FCF Margin +11%</span></span>
-          <span className="mx-4">V 10-Q Q2 2024 <span className="text-green-400">▲ Cross-Border Vol +16%</span></span>
-          <span className="mx-4">NVDA 10-Q Q3 2024 <span className="text-green-400">▲ Gross Margin +8.4pp</span></span>
-          <span className="mx-4">PYPL 10-Q Q2 2024 <span className="text-red-400">▼ Take Rate −14bps</span></span>
-          <span className="mx-4">SQ 10-K 2023 <span className="text-green-400">▲ GPV +12%</span></span>
-          <span className="mx-4">SHOP 10-Q Q1 2024 <span className="text-green-400">▲ FCF Margin +11%</span></span>
-          <span className="mx-4">V 10-Q Q2 2024 <span className="text-green-400">▲ Cross-Border Vol +16%</span></span>
-        </div>
-      </div>
-
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#EAEAEA]">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
@@ -261,8 +245,37 @@ export default function App() {
             </div>
             <span className="text-xl font-bold tracking-tight text-black">REDLINE</span>
           </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+            <a href="#" className="hover:text-black transition-colors">Platform</a>
+            <a href="#" className="hover:text-black transition-colors">Analysis</a>
+            <a href="#" className="hover:text-black transition-colors">Compare</a>
+            <a href="#" className="hover:text-black transition-colors">Pricing</a>
+            <a href="#" className="hover:text-black transition-colors">Research</a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <button className="text-sm font-medium text-gray-600 hover:text-black px-3 py-2">Sign in</button>
+            <button className="text-sm font-bold bg-[#FF2D2D] text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Get access</button>
+          </div>
         </div>
       </header>
+
+      {/* Ticker Bar */}
+      <div className="w-full bg-black text-white text-xs font-mono py-2 overflow-hidden whitespace-nowrap border-b border-black">
+        <div className="inline-block animate-marquee">
+          <span className="mx-4">AAPL 10-K FY2024 <span className="text-green-400">▲ Revenue +2.1%</span></span>
+          <span className="mx-4">NVDA 10-Q Q3 2024 <span className="text-green-400">▲ Gross Margin +8.4pp</span></span>
+          <span className="mx-4">PYPL 10-Q Q2 2024 <span className="text-red-400">▼ Take Rate −14bps</span></span>
+          <span className="mx-4">SQ 10-K FY2024 <span className="text-green-400">▲ GPV Growth +16%</span></span>
+          <span className="mx-4">ADYEN Annual Report <span className="text-red-400">▼ EBITDA Margin −5.2pp</span></span>
+          <span className="mx-4">MSFT 10-Q Q1 2025 <span className="text-green-400">▲ Cloud +21%</span></span>
+          <span className="mx-4">AAPL 10-K FY2024 <span className="text-green-400">▲ Revenue +2.1%</span></span>
+          <span className="mx-4">NVDA 10-Q Q3 2024 <span className="text-green-400">▲ Gross Margin +8.4pp</span></span>
+          <span className="mx-4">PYPL 10-Q Q2 2024 <span className="text-red-400">▼ Take Rate −14bps</span></span>
+          <span className="mx-4">SQ 10-K FY2024 <span className="text-green-400">▲ GPV Growth +16%</span></span>
+          <span className="mx-4">ADYEN Annual Report <span className="text-red-400">▼ EBITDA Margin −5.2pp</span></span>
+          <span className="mx-4">MSFT 10-Q Q1 2025 <span className="text-green-400">▲ Cloud +21%</span></span>
+        </div>
+      </div>
 
       <main className="flex-grow">
         {!selectedCompany ? (
@@ -271,16 +284,16 @@ export default function App() {
             <section className="pt-24 pb-20 px-6 flex flex-col items-center text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 mb-8">
                 <div className="w-2 h-2 rounded-full bg-[#FF2D2D] animate-pulse"></div>
-                <span className="text-xs font-semibold tracking-widest text-gray-600 uppercase">SEC EDGAR · LIVE FILING INTELLIGENCE</span>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase">SEC EDGAR · LIVE FILING INTELLIGENCE</span>
               </div>
               
-              <h1 className="text-6xl md:text-7xl font-extrabold tracking-tighter mb-6 leading-[1.05]">
+              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter mb-6 leading-[1.05]">
                 <span className="block text-black">Institutional-Grade</span>
                 <span className="block text-[#FF2D2D]">Financial Intelligence</span>
               </h1>
               
-              <p className="text-xl text-gray-500 mb-12 max-w-2xl font-medium">
-                Instantly analyze 10-Ks and 10-Qs with AI trained to extract signal from noise, delivering sell-side quality insights in seconds.
+              <p className="text-base text-gray-500 mb-12 max-w-2xl font-medium">
+                Redline integrates directly with SEC EDGAR to deliver high-signal, insight-dense analysis of 10-K and 10-Q filings in under 60 seconds.
               </p>
               
               <div className="w-full max-w-2xl relative mb-6">
@@ -289,11 +302,11 @@ export default function App() {
                   <input 
                     type="text"
                     placeholder="Search company or ticker — e.g. PYPL, Stripe, Visa..."
-                    className="w-full h-16 pl-14 pr-32 bg-gray-900 text-white placeholder:text-gray-500 rounded-full text-lg focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] shadow-inner"
+                    className="w-full h-14 pl-14 pr-32 bg-white text-black placeholder:text-gray-400 border border-gray-200 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] shadow-sm"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <button className="absolute right-2 h-12 px-6 bg-[#FF2D2D] hover:bg-red-600 text-white font-bold rounded-full transition-colors">
+                  <button className="absolute right-1.5 h-11 px-6 bg-[#FF2D2D] hover:bg-red-600 text-white font-bold rounded-md transition-colors">
                     Analyze
                   </button>
                 </div>
@@ -490,27 +503,27 @@ export default function App() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   <div className="relative">
-                    <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm mb-4 z-10 relative">1</div>
-                    <div className="hidden md:block absolute top-4 left-8 right-0 h-[1px] bg-[#EAEAEA]"></div>
-                    <h4 className="font-bold text-black mb-2">Search & Select</h4>
-                    <p className="text-sm text-gray-500">Find any public company and select the specific 10-K or 10-Q filings you want to analyze.</p>
+                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">1</div>
+                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
+                    <h4 className="font-bold text-black mb-2">Direct EDGAR Integration</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">No manual downloads. Redline pulls full-text 10-K and 10-Q filings directly from the SEC EDGAR database in real-time.</p>
                   </div>
                   <div className="relative">
-                    <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm mb-4 z-10 relative">2</div>
-                    <div className="hidden md:block absolute top-4 left-8 right-0 h-[1px] bg-[#EAEAEA]"></div>
-                    <h4 className="font-bold text-black mb-2">Configure Filters</h4>
-                    <p className="text-sm text-gray-500">Select your focus areas: margins, risk factors, forward guidance, or segment performance.</p>
+                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">2</div>
+                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
+                    <h4 className="font-bold text-black mb-2">Configure Parameters</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">Select your analysis focus areas—revenue, margins, MD&A, risk factors, guidance signals, and segment performance.</p>
                   </div>
                   <div className="relative">
-                    <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm mb-4 z-10 relative">3</div>
-                    <div className="hidden md:block absolute top-4 left-8 right-0 h-[1px] bg-[#EAEAEA]"></div>
-                    <h4 className="font-bold text-black mb-2">AI Analysis</h4>
-                    <p className="text-sm text-gray-500">Our engine parses the raw EDGAR text, isolating true deltas and ignoring boilerplate.</p>
+                    <div className="w-10 h-10 rounded-full border-2 border-gray-200 text-black flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-white">3</div>
+                    <div className="hidden md:block absolute top-5 left-10 right-0 h-[2px] bg-gradient-to-r from-gray-200 to-transparent"></div>
+                    <h4 className="font-bold text-black mb-2">Signal-First Processing</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">The full filing is sent to Claude for deep analysis. GPT-4 generates tailored prompts, isolating true deltas and ignoring boilerplate.</p>
                   </div>
                   <div className="relative">
-                    <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm mb-4 z-10 relative">4</div>
-                    <h4 className="font-bold text-black mb-2">Institutional Report</h4>
-                    <p className="text-sm text-gray-500">Receive a structured, sell-side quality note ready for your investment memo.</p>
+                    <div className="w-10 h-10 rounded-full border-2 border-[#FF2D2D] text-[#FF2D2D] flex items-center justify-center font-bold text-lg mb-6 z-10 relative bg-red-50">4</div>
+                    <h4 className="font-bold text-black mb-2">Institutional Output</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">Receive a structured, sell-side quality note ready for your investment memo. Exportable as PDF in one click.</p>
                   </div>
                 </div>
               </div>
@@ -519,12 +532,14 @@ export default function App() {
             {/* CTA Section */}
             <section className="py-24 bg-black text-center">
               <div className="container mx-auto px-6">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-8">Start analyzing filings in 60 seconds</h2>
+                <div className="text-[10px] font-bold tracking-[0.15em] text-[#FF2D2D] uppercase mb-6">Ready to cut through the noise?</div>
+                <h2 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6">Start analyzing filings<br/>in 60 seconds</h2>
+                <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">Join analysts at leading investment firms using Redline to surface insights faster than the market.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-100 transition-colors">
+                  <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-md hover:bg-gray-100 transition-colors">
                     Request early access
                   </button>
-                  <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white text-white font-bold rounded hover:bg-white/10 transition-colors">
+                  <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-md hover:border-white/50 transition-colors">
                     See a live demo
                   </button>
                 </div>
@@ -693,11 +708,17 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#EAEAEA] bg-white py-10 mt-auto">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-500 text-sm font-mono tracking-wide">
-            What actually changed in company filings. Focused on fintech, payments, and high-growth companies.
-          </p>
+      <footer className="border-t border-[#EAEAEA] bg-white py-8 mt-auto">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-lg font-bold text-black">RED<span className="text-[#FF2D2D]">LINE</span></div>
+          <div className="flex gap-6 text-sm text-gray-500 font-medium">
+            <a href="#" className="hover:text-black transition-colors">Privacy</a>
+            <a href="#" className="hover:text-black transition-colors">Terms</a>
+            <a href="#" className="hover:text-black transition-colors">Security</a>
+            <a href="#" className="hover:text-black transition-colors">Careers</a>
+            <a href="#" className="hover:text-black transition-colors">Contact</a>
+          </div>
+          <div className="text-sm text-gray-400 font-mono">© 2026 Redline Financial Inc.</div>
         </div>
       </footer>
       
