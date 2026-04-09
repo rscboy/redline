@@ -307,76 +307,93 @@ export default function App() {
         {!selectedCompany ? (
           <>
             {/* Hero Section */}
-            <section className="pt-20 pb-16 px-10 text-center bg-white">
-              <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#FF2D2D] bg-[#fff0f0] border border-[#ffd5d5] px-3 py-1.5 rounded-full mb-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#FF2D2D] animate-pulse"></div>
-                SEC EDGAR · Live Filing Intelligence
+            <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden">
+              {/* Background Video */}
+              <div className="absolute inset-0 w-full h-full z-0">
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src="https://videos.pexels.com/video-files/8298000/8298000-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+                </video>
+                {/* White Overlay */}
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
               </div>
-              
-              <h1 className="text-[52px] font-bold tracking-[-2px] leading-[1.08] text-[#0a0a0a] mb-5 max-w-[680px] mx-auto">
-                Institutional-Grade<br/>
-                <em className="not-italic text-[#FF2D2D]">Financial Intelligence</em>
-              </h1>
-              
-              <p className="text-[17px] text-[#555] leading-[1.65] max-w-[520px] mx-auto mb-9 font-normal">
-                Redline integrates directly with SEC EDGAR to deliver high-signal, insight-dense analysis of 10-K and 10-Q filings in under 60 seconds.
-              </p>
-              
-              <div className="max-w-[600px] mx-auto mb-4 relative">
-                <div className="absolute left-[18px] top-1/2 -translate-y-1/2 text-[#999] pointer-events-none">
-                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
-                    <circle cx="7.5" cy="7.5" r="5.5" stroke="#aaa" strokeWidth="1.5"/>
-                    <path d="M13 13L11.5 11.5" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
+
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#FF2D2D] bg-[#fff0f0] border border-[#ffd5d5] px-3 py-1.5 rounded-full mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FF2D2D] animate-pulse"></div>
+                  SEC EDGAR · Live Filing Intelligence
                 </div>
-                <input 
-                  type="text"
-                  placeholder="Search company or ticker — e.g. PYPL, Stripe, Visa..."
-                  className="w-full py-4 pl-12 pr-[120px] text-[15px] font-normal text-[#0a0a0a] bg-white border-[1.5px] border-[#e0e0e0] rounded-[14px] outline-none shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all focus:border-[#FF2D2D] focus:shadow-[0_0_0_4px_rgba(204,0,0,0.08)] placeholder:text-[#aaa]"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#FF2D2D] text-white border-none py-[9px] px-[18px] rounded-[9px] text-[13px] font-semibold cursor-pointer transition-all hover:bg-[#bb0000]">
-                  Analyze
-                </button>
                 
-                {isSearching && (
-                  <div className="absolute right-28 top-1/2 -translate-y-1/2">
-                    <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
-                  </div>
-                )}
+                <h1 className="text-[52px] font-bold tracking-[-2px] leading-[1.08] text-[#0a0a0a] mb-5 max-w-[680px] mx-auto">
+                  Institutional-Grade<br/>
+                  <em className="not-italic text-[#FF2D2D]">Financial Intelligence</em>
+                </h1>
                 
-                {/* Search Results Dropdown */}
-                {searchResults.length > 0 && (
-                  <div className="absolute top-full mt-2 w-full bg-white border border-[#EAEAEA] rounded-xl shadow-lg overflow-hidden z-50 text-left">
-                    {searchResults.map((result) => (
-                      <button
-                        key={result.cik_str}
-                        className="w-full text-left px-5 py-4 hover:bg-gray-50 flex items-center justify-between border-b border-[#EAEAEA] last:border-0 transition-colors"
-                        onClick={() => handleSelectCompany(result)}
-                      >
-                        <div>
-                          <div className="font-bold text-black">{result.title}</div>
-                          <div className="text-xs text-gray-500 font-mono mt-1">CIK: {result.cik_str.toString().padStart(10, '0')}</div>
-                        </div>
-                        <Badge variant="outline" className="bg-gray-100 border-gray-200 text-gray-800 font-mono">{result.ticker}</Badge>
-                      </button>
-                    ))}
+                <p className="text-[17px] text-[#555] leading-[1.65] max-w-[520px] mx-auto mb-9 font-normal">
+                  Redline integrates directly with SEC EDGAR to deliver high-signal, insight-dense analysis of 10-K and 10-Q filings in under 60 seconds.
+                </p>
+                
+                <div className="max-w-[600px] mx-auto mb-4 relative">
+                  <div className="absolute left-[18px] top-1/2 -translate-y-1/2 text-[#999] pointer-events-none">
+                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                      <circle cx="7.5" cy="7.5" r="5.5" stroke="#aaa" strokeWidth="1.5"/>
+                      <path d="M13 13L11.5 11.5" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
                   </div>
-                )}
-              </div>
-              
-              <div className="flex items-center justify-center gap-2 flex-wrap mb-16">
-                <span className="text-[12px] text-[#999]">Try:</span>
-                {['PayPal', 'NVDA', 'Block Inc', 'Visa', 'Shopify', 'Adyen'].map(chip => (
-                  <button 
-                    key={chip} 
-                    onClick={() => setSearchQuery(chip)}
-                    className="text-[12px] text-[#555] bg-[#f5f5f5] border border-[#e8e8e8] py-1 px-3 rounded-full cursor-pointer transition-all font-medium hover:bg-[#fff0f0] hover:text-[#FF2D2D] hover:border-[#ffd5d5]"
-                  >
-                    {chip}
+                  <input 
+                    type="text"
+                    placeholder="Search company or ticker — e.g. PYPL, Stripe, Visa..."
+                    className="w-full py-4 pl-12 pr-[120px] text-[15px] font-normal text-[#0a0a0a] bg-white border-[1.5px] border-[#e0e0e0] rounded-[14px] outline-none shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all focus:border-[#FF2D2D] focus:shadow-[0_0_0_4px_rgba(204,0,0,0.08)] placeholder:text-[#aaa]"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#FF2D2D] text-white border-none py-[9px] px-[18px] rounded-[9px] text-[13px] font-semibold cursor-pointer transition-all hover:bg-[#bb0000]">
+                    Analyze
                   </button>
-                ))}
+                  
+                  {isSearching && (
+                    <div className="absolute right-28 top-1/2 -translate-y-1/2">
+                      <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
+                    </div>
+                  )}
+                  
+                  {/* Search Results Dropdown */}
+                  {searchResults.length > 0 && (
+                    <div className="absolute top-full mt-2 w-full bg-white border border-[#EAEAEA] rounded-xl shadow-lg overflow-hidden z-50 text-left">
+                      {searchResults.map((result) => (
+                        <button
+                          key={result.cik_str}
+                          className="w-full text-left px-5 py-4 hover:bg-gray-50 flex items-center justify-between border-b border-[#EAEAEA] last:border-0 transition-colors"
+                          onClick={() => handleSelectCompany(result)}
+                        >
+                          <div>
+                            <div className="font-bold text-black">{result.title}</div>
+                            <div className="text-xs text-gray-500 font-mono mt-1">CIK: {result.cik_str.toString().padStart(10, '0')}</div>
+                          </div>
+                          <Badge variant="outline" className="bg-gray-100 border-gray-200 text-gray-800 font-mono">{result.ticker}</Badge>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex items-center justify-center gap-2 flex-wrap mb-16">
+                  <span className="text-[12px] text-[#999]">Try:</span>
+                  {['PayPal', 'NVDA', 'Block Inc', 'Visa', 'Shopify', 'Adyen'].map(chip => (
+                    <button 
+                      key={chip} 
+                      onClick={() => setSearchQuery(chip)}
+                      className="text-[12px] text-[#555] bg-[#f5f5f5] border border-[#e8e8e8] py-1 px-3 rounded-full cursor-pointer transition-all font-medium hover:bg-[#fff0f0] hover:text-[#FF2D2D] hover:border-[#ffd5d5]"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
               </div>
             </section>
 
@@ -532,59 +549,119 @@ export default function App() {
             </section>
 
             {/* Comparison Engine */}
-            <section className="py-24 bg-white border-t border-[#EAEAEA]">
-              <div className="container mx-auto px-6 max-w-5xl">
-                <div className="mb-12 text-center">
-                  <h3 className="text-xs font-bold text-[#FF2D2D] tracking-widest uppercase mb-3">Comparison Engine</h3>
-                  <h2 className="text-4xl font-extrabold text-black tracking-tight">Head-to-head analysis</h2>
+            <section className="bg-[#fafafa] border-t border-[#f0f0f0] py-20 px-10">
+              <div className="max-w-[1100px] mx-auto">
+                <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Comparison Engine</div>
+                <div className="text-[36px] font-bold tracking-[-1px] text-[#0a0a0a] mb-3 leading-[1.15]">Side-by-side filing analysis</div>
+                <p className="text-[16px] text-[#666] max-w-[500px] leading-[1.6] mb-12">Compare any two filings — same company across periods, or peer-to-peer. Same filters. Structured deltas. Strategic divergence surfaced automatically.</p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  <div className="bg-white border border-[#e0e0e0] rounded-[14px] overflow-hidden">
+                    <div className="py-3.5 px-5 border-b border-[#f0f0f0] flex items-center justify-between">
+                      <span className="text-[14px] font-bold text-[#0a0a0a]">PayPal (PYPL)</span>
+                      <span className="text-[11px] text-[#999]">10-Q Q3 2024 vs Q3 2023</span>
+                    </div>
+                    <div className="py-2">
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Total Payment Volume</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">$422.6B</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+9.4%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Transaction Take Rate</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">1.81%</span>
+                          <span className="text-[11px] font-semibold text-[#d00]">−14bps</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Revenue Growth</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">$7.85B</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+5.8%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Non-GAAP Op. Margin</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">18.3%</span>
+                          <span className="text-[11px] font-semibold text-[#d00]">−80bps</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Active Accounts</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">432M</span>
+                          <span className="text-[11px] font-semibold text-[#d00]">−0.4%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5">
+                        <span className="text-[13px] text-[#666]">Transactions per Account</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">61.4x</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+11%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border border-[#e0e0e0] rounded-[14px] overflow-hidden">
+                    <div className="py-3.5 px-5 border-b border-[#f0f0f0] flex items-center justify-between">
+                      <span className="text-[14px] font-bold text-[#0a0a0a]">Visa (V)</span>
+                      <span className="text-[11px] text-[#999]">10-Q Q3 FY2024 vs Q3 FY2023</span>
+                    </div>
+                    <div className="py-2">
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Payments Volume</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">$3.35T</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+7.2%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Net Revenue Yield</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">0.62%</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+2bps</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Revenue Growth</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">$8.90B</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+9.6%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Operating Margin</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">67.1%</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">+120bps</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5 border-b border-[#fafafa]">
+                        <span className="text-[13px] text-[#666]">Cross-border Volume</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">+16%</span>
+                          <span className="text-[11px] font-semibold text-[#00904a]">Accelerating</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 px-5">
+                        <span className="text-[13px] text-[#666]">Incentives / Revenue</span>
+                        <div className="flex gap-3 items-center">
+                          <span className="text-[13px] font-semibold text-[#0a0a0a]">26.4%</span>
+                          <span className="text-[11px] font-semibold text-[#d00]">+80bps</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Card 1 */}
-                  <div className="border border-[#EAEAEA] rounded-xl p-6 shadow-sm hover:border-gray-300 transition-colors">
-                    <div className="flex items-center justify-between mb-6">
-                      <h4 className="font-bold text-xl">PayPal</h4>
-                      <span className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-600">Q2 2024</span>
-                    </div>
-                    <div className="space-y-3 mb-6">
-                      <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                        <span className="text-sm text-gray-500">Volume Growth</span>
-                        <span className="text-sm font-bold text-green-600">+11%</span>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                        <span className="text-sm text-gray-500">Margin Trend</span>
-                        <span className="text-sm font-bold text-red-600">-120bps</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-2">
-                        <span className="text-sm text-gray-500">Strategic Focus</span>
-                        <span className="text-sm font-medium text-black">Profitable Growth</span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">Struggling with margin compression due to unbranded mix shift. Defending core checkout.</p>
-                  </div>
-                  
-                  {/* Card 2 */}
-                  <div className="border border-[#EAEAEA] rounded-xl p-6 shadow-sm hover:border-gray-300 transition-colors">
-                    <div className="flex items-center justify-between mb-6">
-                      <h4 className="font-bold text-xl">Visa</h4>
-                      <span className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-600">Q2 2024</span>
-                    </div>
-                    <div className="space-y-3 mb-6">
-                      <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                        <span className="text-sm text-gray-500">Volume Growth</span>
-                        <span className="text-sm font-bold text-green-600">+8%</span>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                        <span className="text-sm text-gray-500">Margin Trend</span>
-                        <span className="text-sm font-bold text-green-600">+40bps</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-2">
-                        <span className="text-sm text-gray-500">Strategic Focus</span>
-                        <span className="text-sm font-medium text-black">Value-Added Services</span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">Highly insulated network model. Value-added services driving outsized revenue and margin expansion.</p>
-                  </div>
+
+                <div className="mt-5 bg-white border border-[#e8e8e8] rounded-[12px] py-5 px-6">
+                  <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-[#999] mb-2.5">Redline Comparative Signal</div>
+                  <div className="text-[14px] text-[#333] leading-[1.7]">The divergence between PYPL and V in Q3 2024 is structurally significant: <strong className="text-[#0a0a0a]">Visa is expanding yield while growing volume; PayPal is compressing yield while growing volume.</strong> This is not a cyclical gap — it reflects fundamentally different competitive positions in the payments stack. Visa's moat is strengthening; PayPal's is being tested. The comparison also highlights that account growth metrics are not the right lens for PYPL — <span className="text-[#d00] font-semibold">engagement (TPA) is the correct leading indicator</span>, and at 61.4x, it suggests the existing user base is healthy even as new account growth stalls.</div>
                 </div>
               </div>
             </section>
@@ -725,19 +802,17 @@ export default function App() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 bg-black text-center">
-              <div className="container mx-auto px-6">
-                <div className="text-[10px] font-bold tracking-[0.15em] text-[#FF2D2D] uppercase mb-6">Ready to cut through the noise?</div>
-                <h2 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6">Start analyzing filings<br/>in 60 seconds</h2>
-                <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">Join analysts at leading investment firms using Redline to surface insights faster than the market.</p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-md hover:bg-gray-100 transition-colors">
-                    Request early access
-                  </button>
-                  <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-md hover:border-white/50 transition-colors">
-                    See a live demo
-                  </button>
-                </div>
+            <section className="py-[100px] px-[40px] bg-[#0a0a0a] text-white text-center">
+              <div className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#d00] mb-[20px]">Ready to cut through the noise?</div>
+              <h2 className="text-[44px] font-bold tracking-[-1.5px] leading-[1.1] mb-[18px]">Start analyzing filings<br/>in 60 seconds</h2>
+              <p className="text-[16px] text-[#888] mb-[36px] max-w-[460px] mx-auto">Join analysts at leading investment firms using Redline to surface insights faster than the market.</p>
+              <div className="flex justify-center gap-[12px]">
+                <button className="bg-white text-[#0a0a0a] border-none py-[13px] px-[28px] rounded-[10px] text-[15px] font-semibold cursor-pointer transition-all duration-150 hover:bg-[#f0f0f0]">
+                  Request early access
+                </button>
+                <button className="bg-transparent text-white border border-[rgba(255,255,255,0.2)] py-[13px] px-[28px] rounded-[10px] text-[15px] font-semibold cursor-pointer transition-all duration-150 hover:border-[rgba(255,255,255,0.5)]">
+                  See a live demo
+                </button>
               </div>
             </section>
           </>
