@@ -848,16 +848,6 @@ export default function App() {
                   <div className="text-[13px] text-[#666] leading-[1.6]">Every report exports as a clean, institutional-quality PDF — ready for distribution, client decks, or internal research files.</div>
                 </div>
               </div>
-
-              <div className="mt-16 rounded-[16px] overflow-hidden border border-[#e0e0e0] shadow-[0_4px_24px_rgba(0,0,0,0.06)] relative h-[250px] md:h-[400px]">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000" alt="Data Analytics" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
-                  <div className="text-white">
-                    <div className="text-[11px] font-bold tracking-[0.1em] uppercase mb-2 text-[#FF2D2D]">Deep Insights</div>
-                    <div className="text-[24px] font-bold tracking-tight">Turn raw filings into actionable intelligence</div>
-                  </div>
-                </div>
-              </div>
             </section>
 
             {/* About the Founder */}
