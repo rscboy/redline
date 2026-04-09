@@ -191,6 +191,42 @@ function Research() {
   );
 }
 
+function PrivacyPolicy() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-3xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Legal</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Privacy Policy</h1>
+      <div className="prose prose-gray max-w-none text-[#555] leading-relaxed">
+        <p className="mb-4">Last updated: April 9, 2026</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">1. Information We Collect</h2>
+        <p className="mb-4">We collect information you provide directly to us, such as when you create or modify your account, request on-demand services, contact customer support, or otherwise communicate with us.</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">2. How We Use Your Information</h2>
+        <p className="mb-4">We may use the information we collect about you to provide, maintain, and improve our services, including to facilitate payments, send receipts, provide products and services you request (and send related information), develop new features, provide customer support, authenticate users, and send product updates and administrative messages.</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">3. Sharing of Information</h2>
+        <p className="mb-4">We may share the information we collect about you as described in this Statement or as described at the time of collection or sharing, including as follows: With third parties to provide you a service you requested through a partnership or promotional offering made by a third party or us.</p>
+      </div>
+    </div>
+  );
+}
+
+function Terms() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-3xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Legal</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Terms of Service</h1>
+      <div className="prose prose-gray max-w-none text-[#555] leading-relaxed">
+        <p className="mb-4">Last updated: April 9, 2026</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">1. Acceptance of Terms</h2>
+        <p className="mb-4">By accessing and using Redline, you accept and agree to be bound by the terms and provision of this agreement. In addition, when using these particular services, you shall be subject to any posted guidelines or rules applicable to such services.</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">2. Description of Service</h2>
+        <p className="mb-4">Redline provides users with access to a rich collection of resources, including various financial analysis tools, search services, and personalized content. You also understand and agree that the service is provided "AS-IS" and that Redline assumes no responsibility for the timeliness, deletion, mis-delivery or failure to store any user communications or personalization settings.</p>
+        <h2 className="text-2xl font-bold text-black mt-8 mb-4">3. User Conduct</h2>
+        <p className="mb-4">You understand that all information, data, text, software, music, sound, photographs, graphics, video, messages or other materials, whether publicly posted or privately transmitted, are the sole responsibility of the person from which such content originated.</p>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Ticker[]>([]);
@@ -658,13 +694,16 @@ export default function App() {
                   <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
                     <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
                       <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">1</div>
-                      Executive Summary
+                      Summary
                     </div>
-                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Growth is reaccelerating in volume, but monetization remains structurally impaired</div>
-                    <div className="text-[13px] text-[#555] leading-[1.7]">
-                      PayPal delivered <strong className="text-[#0a0a0a] font-semibold">$422.6B in Total Payment Volume (+9% YoY)</strong>, the fastest growth in five quarters, driven by branded checkout recovery and Venmo commercial traction. However, <span className="text-[#d00] font-semibold">transaction take rate declined to 1.81%, down 14bps YoY</span>, reflecting persistent competitive pressure in unbranded processing and a deliberate mix shift toward large-merchant low-margin volume. Operating income expanded modestly, but margin quality is deteriorating as higher-cost Braintree volumes crowd out branded checkout economics.
-                    </div>
-                    <div className="flex flex-wrap gap-3 my-3.5 mt-3.5">
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-3">Growth is reaccelerating in volume, but monetization remains structurally impaired.</div>
+                    <ul className="list-disc pl-5 space-y-2 text-[13px] text-[#555] leading-[1.7]">
+                      <li>Total Payment Volume (TPV) accelerated to +9% YoY, the fastest growth in five quarters, driven by branded checkout recovery.</li>
+                      <li>Transaction take rate compressed by 14bps YoY to 1.81%, reflecting persistent competitive pressure in unbranded processing.</li>
+                      <li>Operating income expanded modestly, but margin quality is deteriorating as higher-cost Braintree volumes crowd out branded checkout economics.</li>
+                      <li>Management introduced new language around "profitable growth prioritization," signaling a strategic pivot away from aggressive Braintree penetration.</li>
+                    </ul>
+                    <div className="flex flex-wrap gap-3 my-3.5 mt-5">
                       {(sampleActiveFilters.includes('Revenue Trends') || sampleActiveFilters.length === 0) && (
                         <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
                           <div className="text-[11px] text-[#999] font-medium mb-1">Total Payment Volume</div>
@@ -706,61 +745,45 @@ export default function App() {
                   <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
                     <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
                       <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">2</div>
-                      What Changed
+                      What Actually Changed
                     </div>
-                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Branded checkout stabilized, but Braintree mix is eroding unit economics</div>
-                    <div className="text-[13px] text-[#555] leading-[1.7]">
-                      The most significant shift versus Q2 2024 is the <span className="text-[#00904a] font-semibold">stabilization of branded checkout volume after three consecutive quarters of share loss</span>. Management attributed this to PSP integrations with Fastlane and improved conversion tooling. Yet this recovery is being obscured by continued rapid scaling of Braintree — which now represents an estimated 40%+ of total TPV — at take rates near zero. The MD&A introduced new language around "<strong className="text-[#0a0a0a] font-semibold">profitable growth prioritization</strong>" which Redline flags as a strategic pivot signal: management is beginning to walk back aggressive Braintree penetration in favor of margin preservation, though this shift is not yet visible in the reported numbers.
+                    <div className="space-y-5">
+                      <div>
+                        <div className="text-[14px] font-bold text-[#0a0a0a] mb-1">1. Branded checkout stabilized, but Braintree mix is eroding unit economics.</div>
+                        <div className="text-[13px] text-[#555] leading-[1.7]"><strong className="text-[#0a0a0a] font-semibold">Why it matters:</strong> The stabilization of branded checkout volume after three consecutive quarters of share loss is a positive signal, attributed to PSP integrations with Fastlane. However, this recovery is obscured by the rapid scaling of Braintree (now ~40%+ of total TPV) at near-zero take rates. A business that grows volume 9% while its take rate compresses 14bps is effectively running faster to stay in place on revenue.</div>
+                      </div>
+                      
+                      {sampleActiveFilters.includes('Risk Factors') && (
+                        <div>
+                          <div className="text-[14px] font-bold text-[#0a0a0a] mb-1">2. Regulatory scrutiny over unbranded processing fees is intensifying.</div>
+                          <div className="text-[13px] text-[#555] leading-[1.7]"><strong className="text-[#0a0a0a] font-semibold">Why it matters:</strong> The 10-Q introduces new risk factor language regarding CFPB inquiries into payment processing fee structures. While no formal action has been taken, the expanded disclosure suggests management is preparing for potential margin caps on Braintree's core pricing model, representing a material overhang on the unbranded growth narrative.</div>
+                        </div>
+                      )}
+
+                      {sampleActiveFilters.includes('Forward Guidance') && (
+                        <div>
+                          <div className="text-[14px] font-bold text-[#0a0a0a] mb-1">3. FY24 EPS reiterated, but Q4 revenue expectations softened.</div>
+                          <div className="text-[13px] text-[#555] leading-[1.7]"><strong className="text-[#0a0a0a] font-semibold">Why it matters:</strong> Management maintained full-year non-GAAP EPS guidance but subtly walked back Q4 revenue growth expectations from "high single digits" to "mid single digits." This confirms the "profitable growth prioritization" strategy will result in near-term top-line deceleration as low-margin volume is shed.</div>
+                        </div>
+                      )}
+
+                      {sampleActiveFilters.includes('Anomalies') && (
+                        <div>
+                          <div className="text-[14px] font-bold text-[#0a0a0a] mb-1">4. Unusual spike in transaction loss reserves.</div>
+                          <div className="text-[13px] text-[#555] leading-[1.7]"><strong className="text-[#0a0a0a] font-semibold">Why it matters:</strong> Transaction and credit losses spiked 18% sequentially, significantly outpacing volume growth. Footnote 4 attributes this to a specific international merchant cohort rather than broad consumer credit deterioration, but the magnitude warrants close monitoring in Q4.</div>
+                        </div>
+                      )}
                     </div>
                   </div>
-
-                  {sampleActiveFilters.includes('Risk Factors') && (
-                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
-                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
-                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">R</div>
-                        Risk Assessment
-                      </div>
-                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Regulatory scrutiny over unbranded processing fees intensifying</div>
-                      <div className="text-[13px] text-[#555] leading-[1.7]">
-                        The 10-Q introduces new risk factor language regarding <strong className="text-[#0a0a0a] font-semibold">CFPB inquiries into payment processing fee structures</strong>. While no formal action has been taken, the expanded disclosure suggests management is preparing for potential margin caps on Braintree's core pricing model. This represents a material overhang on the unbranded growth narrative.
-                      </div>
-                    </div>
-                  )}
-
-                  {sampleActiveFilters.includes('Forward Guidance') && (
-                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
-                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
-                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">G</div>
-                        Guidance & Outlook
-                      </div>
-                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">FY24 EPS reiterated, but Q4 revenue expectations softened</div>
-                      <div className="text-[13px] text-[#555] leading-[1.7]">
-                        Management maintained full-year non-GAAP EPS guidance but subtly walked back Q4 revenue growth expectations from "high single digits" to "mid single digits." This confirms the <span className="text-[#d00] font-semibold">profitable growth prioritization</span> strategy will result in near-term top-line deceleration as low-margin volume is shed.
-                      </div>
-                    </div>
-                  )}
-
-                  {sampleActiveFilters.includes('Anomalies') && (
-                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
-                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
-                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">A</div>
-                        Anomalies Detected
-                      </div>
-                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Unusual spike in transaction loss reserves</div>
-                      <div className="text-[13px] text-[#555] leading-[1.7]">
-                        Transaction and credit losses spiked 18% sequentially, significantly outpacing volume growth. Footnote 4 attributes this to a <strong className="text-[#0a0a0a] font-semibold">specific international merchant cohort</strong> rather than broad consumer credit deterioration, but the magnitude warrants close monitoring in Q4.
-                      </div>
-                    </div>
-                  )}
 
                   <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
                     <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
                       <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">3</div>
-                      Why It Matters
+                      What This Signals
                     </div>
-                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">The monetization gap is the real story — volume alone doesn't rebuild valuation</div>
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">A forced pivot from volume aggregation to margin preservation.</div>
                     <div className="text-[13px] text-[#555] leading-[1.7]">
-                      Investors anchoring on TPV acceleration risk misreading the quality of that growth. <span className="text-[#d00] font-semibold">A business that grows volume 9% while its take rate compresses 14bps is effectively running faster to stay in place on revenue.</span> The true delta this quarter is that management is now internally acknowledging the structural problem — but has not yet demonstrated the pricing power or product differentiation needed to reverse take rate compression. Until branded checkout mix improves from ~60% to historical levels above 70%, margin recovery will remain elusive regardless of headline volume growth.
+                      PayPal is shifting from a strategy of aggressive unbranded volume acquisition (which successfully scaled Braintree but destroyed unit economics) to a defensive posture focused on "profitable growth." The company is internally acknowledging the structural problem of take rate compression, but has not yet demonstrated the pricing power or product differentiation needed to reverse it. Until branded checkout mix improves from ~60% to historical levels above 70%, margin recovery will remain elusive regardless of headline volume growth.
                     </div>
                   </div>
 
@@ -769,19 +792,18 @@ export default function App() {
                       <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">4</div>
                       What to Watch Next
                     </div>
-                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Three signals that will confirm or deny the thesis in Q4 2024</div>
                     <div className="mt-3">
                       <div className="flex items-start gap-2.5 py-2.5 border-b border-[#f8f8f8] text-[13px] text-[#444] leading-[1.5]">
                         <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
-                        <div>Branded checkout TPV as a disclosed % of total — any management disclosure here would confirm the mix shift thesis and is the single most important datapoint for margin trajectory</div>
+                        <div><strong className="text-[#0a0a0a]">Branded checkout TPV mix:</strong> Any management disclosure of branded checkout as a % of total TPV would confirm the mix shift thesis and is the single most important datapoint for margin trajectory.</div>
                       </div>
                       <div className="flex items-start gap-2.5 py-2.5 border-b border-[#f8f8f8] text-[13px] text-[#444] leading-[1.5]">
                         <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
-                        <div>Fastlane merchant live count beyond the "hundreds" disclosed in Q3 — conversion lift data from named merchants would validate the branded checkout recovery</div>
+                        <div><strong className="text-[#0a0a0a]">Fastlane merchant live count:</strong> Growth beyond the "hundreds" disclosed in Q3, accompanied by conversion lift data from named merchants, would validate the branded checkout recovery.</div>
                       </div>
                       <div className="flex items-start gap-2.5 py-2.5 text-[13px] text-[#444] leading-[1.5] border-b-0">
                         <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
-                        <div>Venmo monetization revenue as a standalone line — management has guided to $1B+ run rate but has not disaggregated; any step-up in disclosure signals confidence in the product</div>
+                        <div><strong className="text-[#0a0a0a]">Venmo standalone monetization:</strong> Management has guided to a $1B+ run rate but has not disaggregated; any step-up in disclosure signals confidence in the product's profitability.</div>
                       </div>
                     </div>
                   </div>
@@ -1230,6 +1252,8 @@ export default function App() {
           <Route path="/compare" element={<Compare />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </main>
 
@@ -1237,13 +1261,13 @@ export default function App() {
       <footer className="py-[32px] px-[40px] border-t border-[#f0f0f0] flex justify-between items-center bg-white mt-auto flex-col md:flex-row gap-6 md:gap-0">
         <div className="text-[15px] font-bold text-[#0a0a0a]">Red<span className="text-[#d00]">line</span></div>
         <div className="flex gap-[24px]">
-          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Privacy</a>
-          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Terms</a>
+          <Link to="/privacy" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Privacy</Link>
+          <Link to="/terms" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Terms</Link>
           <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Security</a>
           <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Careers</a>
           <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Contact</a>
         </div>
-        <div className="text-[12px] text-[#bbb]">© 2025 Redline Financial Inc.</div>
+        <div className="text-[12px] text-[#bbb]">© 2026 Redline Financial Inc.</div>
       </footer>
       
       <style dangerouslySetInnerHTML={{__html: `
