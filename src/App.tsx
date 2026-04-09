@@ -238,42 +238,41 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#EAEAEA]">
-        <div className="container mx-auto px-6 md:px-10 lg:px-12 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3 md:gap-4">
-            <div className="w-9 h-9 rounded overflow-hidden flex items-center justify-center border border-[#EAEAEA]">
-              <img src="https://pbs.twimg.com/profile_images/2039012305313099776/U1Xq-_lh_400x400.jpg" alt="Redline Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </div>
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-black">RED<span className="text-[#FF2D2D]">LINE</span></span>
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-[12px] border-b border-[#f0f0f0] h-[60px] flex items-center justify-between px-10">
+        <a href="#" className="flex items-center gap-[10px] text-none">
+          <div className="w-8 h-8 rounded-[6px] overflow-hidden flex items-center justify-center border border-[#e0e0e0]">
+            <img src="https://pbs.twimg.com/profile_images/2039012305313099776/U1Xq-_lh_400x400.jpg" alt="Redline Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
-          <nav className="hidden lg:flex items-center gap-10 text-sm font-medium text-gray-600">
-            <a href="#" className="hover:text-black transition-colors">Platform</a>
-            <a href="#" className="hover:text-black transition-colors">Analysis</a>
-            <a href="#" className="hover:text-black transition-colors">Compare</a>
-            <a href="#" className="hover:text-black transition-colors">Pricing</a>
-            <a href="#" className="hover:text-black transition-colors">Research</a>
-          </nav>
-          <div className="hidden lg:flex items-center gap-4 md:gap-6">
-            <button className="text-sm font-medium text-gray-600 hover:text-black px-2 py-2">Sign in</button>
-            <button className="text-sm font-bold bg-[#FF2D2D] text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors">Get access</button>
-          </div>
-          
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="lg:hidden p-2 text-gray-600 hover:text-black"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            )}
-          </button>
+          <span className="text-[18px] font-bold tracking-[-0.5px] text-[#0a0a0a]">Red<span className="text-[#d00]">line</span></span>
+        </a>
+        <nav className="hidden lg:flex gap-[28px]">
+          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Platform</a>
+          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Analysis</a>
+          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Compare</a>
+          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Pricing</a>
+          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Research</a>
+        </nav>
+        <div className="hidden lg:flex items-center gap-[12px]">
+          <button className="text-[13px] font-medium text-[#333] bg-transparent border border-[#e0e0e0] py-[7px] px-[16px] rounded-[8px] cursor-pointer transition-all duration-150 hover:border-[#bbb] hover:bg-[#f8f8f8]">Sign in</button>
+          <button className="text-[13px] font-semibold text-white bg-[#d00] border-none py-[8px] px-[18px] rounded-[8px] cursor-pointer transition-all duration-150 hover:bg-[#bb0000] hover:-translate-y-[1px]">Get access</button>
         </div>
+        
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="lg:hidden p-2 text-gray-600 hover:text-black"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          )}
+        </button>
+      </header>
 
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-[#EAEAEA] shadow-lg flex flex-col py-4 px-6 gap-4">
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden absolute top-[60px] left-0 w-full bg-white border-b border-[#f0f0f0] shadow-lg flex flex-col py-4 px-6 gap-4 z-40">
             <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Platform</a>
             <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Analysis</a>
             <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Compare</a>
@@ -285,7 +284,6 @@ export default function App() {
             </div>
           </div>
         )}
-      </header>
 
       {/* Ticker Bar */}
       <div className="w-full bg-black text-white text-xs font-mono py-2 overflow-hidden whitespace-nowrap border-b border-black">
@@ -418,68 +416,117 @@ export default function App() {
             </section>
 
             {/* Sample Report Output */}
-            <section className="py-24 bg-gray-50 border-t border-[#EAEAEA]">
-              <div className="container mx-auto px-6 max-w-5xl">
-                <div className="mb-12">
-                  <h3 className="text-xs font-bold text-[#FF2D2D] tracking-widest uppercase mb-3">Sample Report Output</h3>
-                  <h2 className="text-4xl font-extrabold text-black tracking-tight mb-4">What a Redline analysis looks like</h2>
-                  <p className="text-lg text-gray-600 max-w-2xl">Structured, dense, and actionable. We format insights exactly how a sell-side analyst would write them, prioritizing clarity and impact.</p>
+            <section className="py-20 px-10 max-w-[1100px] mx-auto">
+              <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Sample Report Output</div>
+              <div className="text-[36px] font-bold tracking-[-1px] text-[#0a0a0a] mb-3 leading-[1.15]">What a Redline analysis<br/>looks like</div>
+              <p className="text-[16px] text-[#666] max-w-[500px] leading-[1.6] mb-12">Focused on fintech, payments, and high-growth companies. Every report follows the same structured format — Summary → What Changed → Why It Matters → What to Watch Next.</p>
+
+              <div className="bg-[#fafafa] border border-[#f0f0f0] rounded-[12px] py-4 px-5 mb-5 flex flex-wrap gap-2 items-center">
+                <span className="text-[11px] font-bold text-[#999] uppercase tracking-[0.08em] mr-1">Focus:</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">Revenue Trends</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">Margin Dynamics</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">MD&A Insights</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Risk Factors</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Cash Flow</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Segment Performance</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Forward Guidance</span>
+                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Anomalies</span>
+              </div>
+
+              <div className="bg-white border border-[#e8e8e8] rounded-[16px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                <div className="bg-[#0a0a0a] py-5 px-7 flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <div className="text-white text-[15px] font-semibold flex items-center gap-2">
+                      PayPal Holdings, Inc. — 10-Q Q3 2024 
+                      <span className="inline-flex items-center gap-[5px] text-[11px] font-semibold text-[#d00] bg-[#fff0f0] border border-[#ffd5d5] py-[3px] px-[8px] rounded-[6px] align-middle">EDGAR</span>
+                    </div>
+                    <div className="text-[#666] text-[12px] mt-1">NASDAQ: PYPL · Filed Nov 5, 2024 · Analysis generated in 42s</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(255,255,255,0.1)] text-[#aaa]">10-Q</span>
+                    <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(204,0,0,0.2)] text-[#ff6b6b]">Margin Pressure</span>
+                    <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(0,180,100,0.2)] text-[#00b464]">GPV Reaccelerating</span>
+                  </div>
                 </div>
                 
-                <div className="bg-white border border-[#EAEAEA] rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] overflow-hidden">
-                  <div className="bg-black px-6 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-white font-bold text-lg">PayPal Holdings, Inc.</span>
-                      <span className="px-2 py-0.5 bg-gray-800 text-gray-300 text-xs font-mono rounded">PYPL</span>
+                <div className="p-7">
+                  <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                      <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">1</div>
+                      Executive Summary
                     </div>
-                    <div className="text-gray-400 text-sm font-mono">10-Q · Q2 2024</div>
-                  </div>
-                  
-                  <div className="p-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 pb-8 border-b border-[#EAEAEA]">
-                      <div>
-                        <div className="text-xs text-gray-500 font-mono mb-1">Total Payment Vol</div>
-                        <div className="text-2xl font-bold text-black">$416.8B</div>
-                        <div className="text-sm text-green-600 font-medium mt-1">▲ +11% YoY</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-gray-500 font-mono mb-1">Transaction Margin</div>
-                        <div className="text-2xl font-bold text-black">45.8%</div>
-                        <div className="text-sm text-red-600 font-medium mt-1">▼ -120bps YoY</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-gray-500 font-mono mb-1">Active Accounts</div>
-                        <div className="text-2xl font-bold text-black">429M</div>
-                        <div className="text-sm text-red-600 font-medium mt-1">▼ -0.4% QoQ</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-gray-500 font-mono mb-1">FCF</div>
-                        <div className="text-2xl font-bold text-black">$1.4B</div>
-                        <div className="text-sm text-green-600 font-medium mt-1">▲ +24% YoY</div>
-                      </div>
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Growth is reaccelerating in volume, but monetization remains structurally impaired</div>
+                    <div className="text-[13px] text-[#555] leading-[1.7]">
+                      PayPal delivered <strong className="text-[#0a0a0a] font-semibold">$422.6B in Total Payment Volume (+9% YoY)</strong>, the fastest growth in five quarters, driven by branded checkout recovery and Venmo commercial traction. However, <span className="text-[#d00] font-semibold">transaction take rate declined to 1.81%, down 14bps YoY</span>, reflecting persistent competitive pressure in unbranded processing and a deliberate mix shift toward large-merchant low-margin volume. Operating income expanded modestly, but margin quality is deteriorating as higher-cost Braintree volumes crowd out branded checkout economics.
                     </div>
-                    
-                    <div className="space-y-8">
-                      <div>
-                        <h4 className="text-sm font-extrabold text-black uppercase tracking-wide mb-3">What Changed</h4>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          Braintree continues to drive top-line TPV growth, but its lower take rate is compressing overall transaction margins. <span className="text-[#FF2D2D] font-semibold">Branded checkout volume decelerated to +4%</span>, indicating sustained competitive pressure from Apple Pay. Management noted a strategic shift away from unprofitable international corridors.
-                        </p>
+                    <div className="flex flex-wrap gap-3 my-3.5 mt-3.5">
+                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                        <div className="text-[11px] text-[#999] font-medium mb-1">Total Payment Volume</div>
+                        <div className="text-[20px] font-bold text-[#0a0a0a]">$422.6B</div>
+                        <div className="text-[12px] mt-0.5 text-[#00904a]">+9.4% YoY</div>
                       </div>
-                      <div>
-                        <h4 className="text-sm font-extrabold text-black uppercase tracking-wide mb-3">Why It Matters</h4>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          The margin compression narrative remains the primary overhang. While absolute gross profit dollars grew, the mix shift toward unbranded processing (Braintree) structurally lowers the margin ceiling. The <span className="text-[#FF2D2D] font-semibold">decline in active accounts</span> suggests the "profitable growth" strategy is actively shedding marginal users.
-                        </p>
+                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                        <div className="text-[11px] text-[#999] font-medium mb-1">Transaction Take Rate</div>
+                        <div className="text-[20px] font-bold text-[#0a0a0a]">1.81%</div>
+                        <div className="text-[12px] mt-0.5 text-[#d00]">−14bps YoY</div>
                       </div>
-                      <div>
-                        <h4 className="text-sm font-extrabold text-black uppercase tracking-wide mb-3">What To Watch Next</h4>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          Look for updates on Fastlane adoption in Q3. If Fastlane can improve guest checkout conversion without cannibalizing branded volume, it could stabilize the transaction margin profile. Monitor SMB churn in the core PayPal product.
-                        </p>
+                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                        <div className="text-[11px] text-[#999] font-medium mb-1">Non-GAAP Op. Margin</div>
+                        <div className="text-[20px] font-bold text-[#0a0a0a]">18.3%</div>
+                        <div className="text-[12px] mt-0.5 text-[#d00]">−80bps YoY</div>
+                      </div>
+                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                        <div className="text-[11px] text-[#999] font-medium mb-1">Active Accounts</div>
+                        <div className="text-[20px] font-bold text-[#0a0a0a]">432M</div>
+                        <div className="text-[12px] mt-0.5 text-[#d00]">−0.4% YoY</div>
                       </div>
                     </div>
                   </div>
+
+                  <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                      <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">2</div>
+                      What Changed
+                    </div>
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Branded checkout stabilized, but Braintree mix is eroding unit economics</div>
+                    <div className="text-[13px] text-[#555] leading-[1.7]">
+                      The most significant shift versus Q2 2024 is the <span className="text-[#00904a] font-semibold">stabilization of branded checkout volume after three consecutive quarters of share loss</span>. Management attributed this to PSP integrations with Fastlane and improved conversion tooling. Yet this recovery is being obscured by continued rapid scaling of Braintree — which now represents an estimated 40%+ of total TPV — at take rates near zero. The MD&A introduced new language around "<strong className="text-[#0a0a0a] font-semibold">profitable growth prioritization</strong>" which Redline flags as a strategic pivot signal: management is beginning to walk back aggressive Braintree penetration in favor of margin preservation, though this shift is not yet visible in the reported numbers.
+                    </div>
+                  </div>
+
+                  <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                      <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">3</div>
+                      Why It Matters
+                    </div>
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">The monetization gap is the real story — volume alone doesn't rebuild valuation</div>
+                    <div className="text-[13px] text-[#555] leading-[1.7]">
+                      Investors anchoring on TPV acceleration risk misreading the quality of that growth. <span className="text-[#d00] font-semibold">A business that grows volume 9% while its take rate compresses 14bps is effectively running faster to stay in place on revenue.</span> The true delta this quarter is that management is now internally acknowledging the structural problem — but has not yet demonstrated the pricing power or product differentiation needed to reverse take rate compression. Until branded checkout mix improves from ~60% to historical levels above 70%, margin recovery will remain elusive regardless of headline volume growth.
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                      <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">4</div>
+                      What to Watch Next
+                    </div>
+                    <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Three signals that will confirm or deny the thesis in Q4 2024</div>
+                    <div className="mt-3">
+                      <div className="flex items-start gap-2.5 py-2.5 border-b border-[#f8f8f8] text-[13px] text-[#444] leading-[1.5]">
+                        <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
+                        <div>Branded checkout TPV as a disclosed % of total — any management disclosure here would confirm the mix shift thesis and is the single most important datapoint for margin trajectory</div>
+                      </div>
+                      <div className="flex items-start gap-2.5 py-2.5 border-b border-[#f8f8f8] text-[13px] text-[#444] leading-[1.5]">
+                        <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
+                        <div>Fastlane merchant live count beyond the "hundreds" disclosed in Q3 — conversion lift data from named merchants would validate the branded checkout recovery</div>
+                      </div>
+                      <div className="flex items-start gap-2.5 py-2.5 text-[13px] text-[#444] leading-[1.5] border-b-0">
+                        <div className="w-1.5 h-1.5 bg-[#d00] rounded-full mt-1.5 shrink-0"></div>
+                        <div>Venmo monetization revenue as a standalone line — management has guided to $1B+ run rate but has not disaggregated; any step-up in disclosure signals confidence in the product</div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </section>
@@ -856,18 +903,16 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#EAEAEA] bg-white py-8 mt-auto">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-lg font-bold text-black">RED<span className="text-[#FF2D2D]">LINE</span></div>
-          <div className="flex gap-6 text-sm text-gray-500 font-medium">
-            <a href="#" className="hover:text-black transition-colors">Privacy</a>
-            <a href="#" className="hover:text-black transition-colors">Terms</a>
-            <a href="#" className="hover:text-black transition-colors">Security</a>
-            <a href="#" className="hover:text-black transition-colors">Careers</a>
-            <a href="#" className="hover:text-black transition-colors">Contact</a>
-          </div>
-          <div className="text-sm text-gray-400 font-mono">© 2026 Redline Financial Inc.</div>
+      <footer className="py-[32px] px-[40px] border-t border-[#f0f0f0] flex justify-between items-center bg-white mt-auto flex-col md:flex-row gap-6 md:gap-0">
+        <div className="text-[15px] font-bold text-[#0a0a0a]">Red<span className="text-[#d00]">line</span></div>
+        <div className="flex gap-[24px]">
+          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Privacy</a>
+          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Terms</a>
+          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Security</a>
+          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Careers</a>
+          <a href="#" className="text-[12px] text-[#999] no-underline transition-colors duration-150 hover:text-[#0a0a0a]">Contact</a>
         </div>
+        <div className="text-[12px] text-[#bbb]">© 2025 Redline Financial Inc.</div>
       </footer>
       
       <style dangerouslySetInnerHTML={{__html: `
