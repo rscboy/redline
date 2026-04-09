@@ -36,6 +36,9 @@ export default function App() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [sampleActiveFilters, setSampleActiveFilters] = useState<string[]>(['Revenue Trends', 'Margin Dynamics', 'MD&A Insights']);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const [isGetAccessOpen, setIsGetAccessOpen] = useState(false);
   
   const reportRef = useRef<HTMLDivElement>(null);
 
@@ -253,8 +256,8 @@ export default function App() {
           <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Research</a>
         </nav>
         <div className="hidden lg:flex items-center gap-[12px]">
-          <button className="text-[13px] font-medium text-[#333] bg-transparent border border-[#e0e0e0] py-[7px] px-[16px] rounded-[8px] cursor-pointer transition-all duration-150 hover:border-[#bbb] hover:bg-[#f8f8f8]">Sign in</button>
-          <button className="text-[13px] font-semibold text-white bg-[#d00] border-none py-[8px] px-[18px] rounded-[8px] cursor-pointer transition-all duration-150 hover:bg-[#bb0000] hover:-translate-y-[1px]">Get access</button>
+          <button onClick={() => setIsSignInOpen(true)} className="text-[13px] font-medium text-[#333] bg-transparent border border-[#e0e0e0] py-[7px] px-[16px] rounded-[8px] cursor-pointer transition-all duration-150 hover:border-[#bbb] hover:bg-[#f8f8f8]">Sign in</button>
+          <button onClick={() => setIsGetAccessOpen(true)} className="text-[13px] font-semibold text-white bg-[#d00] border-none py-[8px] px-[18px] rounded-[8px] cursor-pointer transition-all duration-150 hover:bg-[#bb0000] hover:-translate-y-[1px]">Get access</button>
         </div>
         
         {/* Mobile Menu Toggle */}
@@ -279,8 +282,8 @@ export default function App() {
             <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Pricing</a>
             <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Research</a>
             <div className="flex flex-col gap-3 mt-2">
-              <button className="w-full text-center text-base font-medium text-gray-800 py-3 border border-gray-200 rounded-md">Sign in</button>
-              <button className="w-full text-center text-base font-bold bg-[#FF2D2D] text-white py-3 rounded-md">Get access</button>
+              <button onClick={() => { setIsMobileMenuOpen(false); setIsSignInOpen(true); }} className="w-full text-center text-base font-medium text-gray-800 py-3 border border-gray-200 rounded-md">Sign in</button>
+              <button onClick={() => { setIsMobileMenuOpen(false); setIsGetAccessOpen(true); }} className="w-full text-center text-base font-bold bg-[#FF2D2D] text-white py-3 rounded-md">Get access</button>
             </div>
           </div>
         )}
@@ -317,7 +320,7 @@ export default function App() {
                   playsInline 
                   className="absolute inset-0 w-full h-full object-cover"
                 >
-                  <source src="https://videos.pexels.com/video-files/8298000/8298000-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+                  <source src="https://cdn.coverr.co/videos/coverr-financial-data-on-a-monitor-2518/1080p.mp4" type="video/mp4" />
                 </video>
                 {/* White Overlay */}
                 <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
@@ -440,14 +443,25 @@ export default function App() {
 
               <div className="bg-[#fafafa] border border-[#f0f0f0] rounded-[12px] py-4 px-5 mb-5 flex flex-wrap gap-2 items-center">
                 <span className="text-[11px] font-bold text-[#999] uppercase tracking-[0.08em] mr-1">Focus:</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">Revenue Trends</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">Margin Dynamics</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-transparent transition-all duration-150 bg-[#0a0a0a] text-white">MD&A Insights</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Risk Factors</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Cash Flow</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Segment Performance</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Forward Guidance</span>
-                <span className="text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border border-[#e0e0e0] transition-all duration-150 bg-white text-[#555] hover:border-[#d00] hover:text-[#d00]">Anomalies</span>
+                {['Revenue Trends', 'Margin Dynamics', 'MD&A Insights', 'Risk Factors', 'Cash Flow', 'Segment Performance', 'Forward Guidance', 'Anomalies'].map(filter => (
+                  <span 
+                    key={filter}
+                    onClick={() => {
+                      setSampleActiveFilters(prev => 
+                        prev.includes(filter) 
+                          ? prev.filter(f => f !== filter)
+                          : [...prev, filter]
+                      );
+                    }}
+                    className={`text-[12px] font-medium py-1.5 px-3 rounded-[8px] cursor-pointer border transition-all duration-150 select-none ${
+                      sampleActiveFilters.includes(filter)
+                        ? 'bg-[#0a0a0a] text-white border-transparent'
+                        : 'bg-white text-[#555] border-[#e0e0e0] hover:border-[#d00] hover:text-[#d00]'
+                    }`}
+                  >
+                    {filter}
+                  </span>
+                ))}
               </div>
 
               <div className="bg-white border border-[#e8e8e8] rounded-[16px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
@@ -461,8 +475,10 @@ export default function App() {
                   </div>
                   <div className="flex gap-2">
                     <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(255,255,255,0.1)] text-[#aaa]">10-Q</span>
-                    <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(204,0,0,0.2)] text-[#ff6b6b]">Margin Pressure</span>
-                    <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(0,180,100,0.2)] text-[#00b464]">GPV Reaccelerating</span>
+                    {sampleActiveFilters.includes('Margin Dynamics') && <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(204,0,0,0.2)] text-[#ff6b6b]">Margin Pressure</span>}
+                    {sampleActiveFilters.includes('Revenue Trends') && <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(0,180,100,0.2)] text-[#00b464]">GPV Reaccelerating</span>}
+                    {sampleActiveFilters.includes('Risk Factors') && <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(204,0,0,0.2)] text-[#ff6b6b]">Regulatory Risk</span>}
+                    {sampleActiveFilters.includes('Anomalies') && <span className="text-[11px] font-semibold py-1 px-2.5 rounded-[6px] tracking-[0.04em] bg-[rgba(255,165,0,0.2)] text-[#ffa500]">Credit Loss Spike</span>}
                   </div>
                 </div>
                 
@@ -477,26 +493,41 @@ export default function App() {
                       PayPal delivered <strong className="text-[#0a0a0a] font-semibold">$422.6B in Total Payment Volume (+9% YoY)</strong>, the fastest growth in five quarters, driven by branded checkout recovery and Venmo commercial traction. However, <span className="text-[#d00] font-semibold">transaction take rate declined to 1.81%, down 14bps YoY</span>, reflecting persistent competitive pressure in unbranded processing and a deliberate mix shift toward large-merchant low-margin volume. Operating income expanded modestly, but margin quality is deteriorating as higher-cost Braintree volumes crowd out branded checkout economics.
                     </div>
                     <div className="flex flex-wrap gap-3 my-3.5 mt-3.5">
-                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
-                        <div className="text-[11px] text-[#999] font-medium mb-1">Total Payment Volume</div>
-                        <div className="text-[20px] font-bold text-[#0a0a0a]">$422.6B</div>
-                        <div className="text-[12px] mt-0.5 text-[#00904a]">+9.4% YoY</div>
-                      </div>
-                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
-                        <div className="text-[11px] text-[#999] font-medium mb-1">Transaction Take Rate</div>
-                        <div className="text-[20px] font-bold text-[#0a0a0a]">1.81%</div>
-                        <div className="text-[12px] mt-0.5 text-[#d00]">−14bps YoY</div>
-                      </div>
-                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
-                        <div className="text-[11px] text-[#999] font-medium mb-1">Non-GAAP Op. Margin</div>
-                        <div className="text-[20px] font-bold text-[#0a0a0a]">18.3%</div>
-                        <div className="text-[12px] mt-0.5 text-[#d00]">−80bps YoY</div>
-                      </div>
-                      <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
-                        <div className="text-[11px] text-[#999] font-medium mb-1">Active Accounts</div>
-                        <div className="text-[20px] font-bold text-[#0a0a0a]">432M</div>
-                        <div className="text-[12px] mt-0.5 text-[#d00]">−0.4% YoY</div>
-                      </div>
+                      {(sampleActiveFilters.includes('Revenue Trends') || sampleActiveFilters.length === 0) && (
+                        <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                          <div className="text-[11px] text-[#999] font-medium mb-1">Total Payment Volume</div>
+                          <div className="text-[20px] font-bold text-[#0a0a0a]">$422.6B</div>
+                          <div className="text-[12px] mt-0.5 text-[#00904a]">+9.4% YoY</div>
+                        </div>
+                      )}
+                      {(sampleActiveFilters.includes('Margin Dynamics') || sampleActiveFilters.length === 0) && (
+                        <>
+                          <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                            <div className="text-[11px] text-[#999] font-medium mb-1">Transaction Take Rate</div>
+                            <div className="text-[20px] font-bold text-[#0a0a0a]">1.81%</div>
+                            <div className="text-[12px] mt-0.5 text-[#d00]">−14bps YoY</div>
+                          </div>
+                          <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                            <div className="text-[11px] text-[#999] font-medium mb-1">Non-GAAP Op. Margin</div>
+                            <div className="text-[20px] font-bold text-[#0a0a0a]">18.3%</div>
+                            <div className="text-[12px] mt-0.5 text-[#d00]">−80bps YoY</div>
+                          </div>
+                        </>
+                      )}
+                      {(sampleActiveFilters.includes('Segment Performance') || sampleActiveFilters.length === 0) && (
+                        <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                          <div className="text-[11px] text-[#999] font-medium mb-1">Active Accounts</div>
+                          <div className="text-[20px] font-bold text-[#0a0a0a]">432M</div>
+                          <div className="text-[12px] mt-0.5 text-[#d00]">−0.4% YoY</div>
+                        </div>
+                      )}
+                      {sampleActiveFilters.includes('Cash Flow') && (
+                        <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f0f0f0] rounded-[10px] p-3.5">
+                          <div className="text-[11px] text-[#999] font-medium mb-1">Free Cash Flow</div>
+                          <div className="text-[20px] font-bold text-[#0a0a0a]">$1.37B</div>
+                          <div className="text-[12px] mt-0.5 text-[#00904a]">+22% YoY</div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -510,6 +541,45 @@ export default function App() {
                       The most significant shift versus Q2 2024 is the <span className="text-[#00904a] font-semibold">stabilization of branded checkout volume after three consecutive quarters of share loss</span>. Management attributed this to PSP integrations with Fastlane and improved conversion tooling. Yet this recovery is being obscured by continued rapid scaling of Braintree — which now represents an estimated 40%+ of total TPV — at take rates near zero. The MD&A introduced new language around "<strong className="text-[#0a0a0a] font-semibold">profitable growth prioritization</strong>" which Redline flags as a strategic pivot signal: management is beginning to walk back aggressive Braintree penetration in favor of margin preservation, though this shift is not yet visible in the reported numbers.
                     </div>
                   </div>
+
+                  {sampleActiveFilters.includes('Risk Factors') && (
+                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">R</div>
+                        Risk Assessment
+                      </div>
+                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Regulatory scrutiny over unbranded processing fees intensifying</div>
+                      <div className="text-[13px] text-[#555] leading-[1.7]">
+                        The 10-Q introduces new risk factor language regarding <strong className="text-[#0a0a0a] font-semibold">CFPB inquiries into payment processing fee structures</strong>. While no formal action has been taken, the expanded disclosure suggests management is preparing for potential margin caps on Braintree's core pricing model. This represents a material overhang on the unbranded growth narrative.
+                      </div>
+                    </div>
+                  )}
+
+                  {sampleActiveFilters.includes('Forward Guidance') && (
+                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">G</div>
+                        Guidance & Outlook
+                      </div>
+                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">FY24 EPS reiterated, but Q4 revenue expectations softened</div>
+                      <div className="text-[13px] text-[#555] leading-[1.7]">
+                        Management maintained full-year non-GAAP EPS guidance but subtly walked back Q4 revenue growth expectations from "high single digits" to "mid single digits." This confirms the <span className="text-[#d00] font-semibold">profitable growth prioritization</span> strategy will result in near-term top-line deceleration as low-margin volume is shed.
+                      </div>
+                    </div>
+                  )}
+
+                  {sampleActiveFilters.includes('Anomalies') && (
+                    <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
+                      <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
+                        <div className="w-[18px] h-[18px] bg-[#d00] rounded-[4px] flex items-center justify-center text-[10px] font-extrabold text-white">A</div>
+                        Anomalies Detected
+                      </div>
+                      <div className="text-[15px] font-bold text-[#0a0a0a] mb-2">Unusual spike in transaction loss reserves</div>
+                      <div className="text-[13px] text-[#555] leading-[1.7]">
+                        Transaction and credit losses spiked 18% sequentially, significantly outpacing volume growth. Footnote 4 attributes this to a <strong className="text-[#0a0a0a] font-semibold">specific international merchant cohort</strong> rather than broad consumer credit deterioration, but the magnitude warrants close monitoring in Q4.
+                      </div>
+                    </div>
+                  )}
 
                   <div className="mb-6 pb-6 border-b border-[#f0f0f0]">
                     <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] mb-2.5">
@@ -554,6 +624,16 @@ export default function App() {
                 <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Comparison Engine</div>
                 <div className="text-[36px] font-bold tracking-[-1px] text-[#0a0a0a] mb-3 leading-[1.15]">Side-by-side filing analysis</div>
                 <p className="text-[16px] text-[#666] max-w-[500px] leading-[1.6] mb-12">Compare any two filings — same company across periods, or peer-to-peer. Same filters. Structured deltas. Strategic divergence surfaced automatically.</p>
+
+                <div className="mt-10 mb-10 rounded-[16px] overflow-hidden border border-[#e0e0e0] shadow-[0_4px_24px_rgba(0,0,0,0.06)] relative h-[250px] md:h-[350px]">
+                  <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=2000" alt="Trading Dashboard" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
+                    <div className="text-white">
+                      <div className="text-[11px] font-bold tracking-[0.1em] uppercase mb-2 text-[#FF2D2D]">Real-time Data</div>
+                      <div className="text-[24px] font-bold tracking-tight">Institutional-grade market intelligence</div>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
                   <div className="bg-white border border-[#e0e0e0] rounded-[14px] overflow-hidden">
@@ -766,6 +846,16 @@ export default function App() {
                   </div>
                   <div className="text-[15px] font-bold text-[#0a0a0a] mb-[6px]">PDF Export</div>
                   <div className="text-[13px] text-[#666] leading-[1.6]">Every report exports as a clean, institutional-quality PDF — ready for distribution, client decks, or internal research files.</div>
+                </div>
+              </div>
+
+              <div className="mt-16 rounded-[16px] overflow-hidden border border-[#e0e0e0] shadow-[0_4px_24px_rgba(0,0,0,0.06)] relative h-[250px] md:h-[400px]">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000" alt="Data Analytics" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
+                  <div className="text-white">
+                    <div className="text-[11px] font-bold tracking-[0.1em] uppercase mb-2 text-[#FF2D2D]">Deep Insights</div>
+                    <div className="text-[24px] font-bold tracking-tight">Turn raw filings into actionable intelligence</div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -1007,6 +1097,105 @@ export default function App() {
           animation-delay: 300ms;
         }
       `}} />
+
+      {/* Sign In Modal */}
+      {isSignInOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button 
+              onClick={() => setIsSignInOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div className="text-center mb-8">
+              <div className="w-12 h-12 bg-[#FF2D2D] rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
+                  <path d="M3 15L9 3L15 15H11L9 11L7 15H3Z" fill="white"/>
+                  <path d="M6 15L9 9L12 15" fill="rgba(255,255,255,0.4)"/>
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-black mb-2 tracking-tight">Welcome back</h2>
+              <p className="text-sm text-gray-500">Sign in to your Redline account</p>
+            </div>
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsSignInOpen(false); }}>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Email</label>
+                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="name@company.com" />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">Password</label>
+                  <a href="#" className="text-xs text-[#FF2D2D] font-medium hover:underline">Forgot?</a>
+                </div>
+                <input type="password" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="••••••••" />
+              </div>
+              <button type="submit" className="w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors mt-2">
+                Sign In
+              </button>
+            </form>
+            <div className="mt-6 text-center text-sm text-gray-500">
+              Don't have an account? <button onClick={() => { setIsSignInOpen(false); setIsGetAccessOpen(true); }} className="text-black font-bold hover:underline">Get access</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Get Access Modal */}
+      {isGetAccessOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button 
+              onClick={() => setIsGetAccessOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-black mb-2 tracking-tight">Request Access</h2>
+              <p className="text-sm text-gray-500">Join leading analysts using Redline.</p>
+            </div>
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsGetAccessOpen(false); }}>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">First Name</label>
+                  <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Jane" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Last Name</label>
+                  <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Doe" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Work Email</label>
+                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="jane@fund.com" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Company</label>
+                <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Acme Capital" />
+              </div>
+              <button type="submit" className="w-full bg-[#FF2D2D] text-white font-bold py-3.5 rounded-xl hover:bg-[#d00] transition-colors mt-2">
+                Request Early Access
+              </button>
+            </form>
+            <div className="mt-6 text-center text-xs text-gray-400">
+              By requesting access, you agree to our Terms of Service and Privacy Policy.
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Social Links Widget */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="https://x.com/redlineapp" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[#e0e0e0] text-[#555] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-black hover:text-white hover:border-black transition-all duration-200 hover:-translate-y-1">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.005 4.15H5.059z"/></svg>
+        </a>
+        <a href="https://substack.com/@redlinehq" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[#e0e0e0] text-[#555] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-[#FF6719] hover:text-white hover:border-[#FF6719] transition-all duration-200 hover:-translate-y-1">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/redlinehq/?viewAsMember=true" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[#e0e0e0] text-[#555] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200 hover:-translate-y-1">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
     </div>
   );
 }
