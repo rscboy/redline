@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Search, FileText, TrendingUp, AlertTriangle, Activity, DollarSign, BarChart2, Zap, Target, Layers, ArrowRight, Download, Loader2 } from 'lucide-react';
 import { searchTickers, getCompanyFilings, getFilingDocument, Ticker, Filing } from './services/sec';
 import { generateAnalysis, generateComparativeAnalysis, AnalysisFilter } from './services/ai';
@@ -21,6 +22,174 @@ const FILTERS: { label: AnalysisFilter; icon: React.ReactNode }[] = [
   { label: "Anomalies", icon: <Zap className="w-4 h-4" /> },
   { label: "Comparative Metrics", icon: <BarChart2 className="w-4 h-4" /> },
 ];
+
+function Platform() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-5xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Platform</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Built for institutional speed.</h1>
+      <p className="text-lg text-[#555] max-w-2xl leading-relaxed mb-12">
+        Redline's platform ingests SEC EDGAR filings in real-time, applying proprietary AI models to extract, structure, and analyze financial data faster than any human analyst.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-[#fafafa] border border-[#e0e0e0] rounded-2xl p-8">
+          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm border border-[#f0f0f0]">
+            <Zap className="w-6 h-6 text-[#d00]" />
+          </div>
+          <h3 className="text-xl font-bold text-black mb-3">Real-time Ingestion</h3>
+          <p className="text-[#666] leading-relaxed">Filings are processed the millisecond they hit EDGAR. No delays, no manual downloads.</p>
+        </div>
+        <div className="bg-[#fafafa] border border-[#e0e0e0] rounded-2xl p-8">
+          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm border border-[#f0f0f0]">
+            <Layers className="w-6 h-6 text-[#d00]" />
+          </div>
+          <h3 className="text-xl font-bold text-black mb-3">Deep Structuring</h3>
+          <p className="text-[#666] leading-relaxed">Unstructured text is converted into queryable, comparative data points instantly.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Analysis() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-5xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Analysis</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Signal over noise.</h1>
+      <p className="text-lg text-[#555] max-w-2xl leading-relaxed mb-12">
+        Our analysis engine doesn't just summarize; it identifies the critical shifts in management tone, risk factors, and margin dynamics that move markets.
+      </p>
+      <div className="bg-white border border-[#e0e0e0] rounded-2xl overflow-hidden shadow-sm">
+        <div className="border-b border-[#f0f0f0] bg-[#fafafa] px-6 py-4">
+          <h3 className="font-bold text-black">Analysis Capabilities</h3>
+        </div>
+        <div className="divide-y divide-[#f0f0f0]">
+          <div className="px-6 py-4 flex items-center justify-between">
+            <span className="font-medium text-[#333]">MD&A Tone Shift Detection</span>
+            <Badge variant="outline" className="text-[#d00] border-[#d00]/20 bg-[#d00]/5">Active</Badge>
+          </div>
+          <div className="px-6 py-4 flex items-center justify-between">
+            <span className="font-medium text-[#333]">Risk Factor Deltas</span>
+            <Badge variant="outline" className="text-[#d00] border-[#d00]/20 bg-[#d00]/5">Active</Badge>
+          </div>
+          <div className="px-6 py-4 flex items-center justify-between">
+            <span className="font-medium text-[#333]">Guidance Extraction</span>
+            <Badge variant="outline" className="text-[#d00] border-[#d00]/20 bg-[#d00]/5">Active</Badge>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Compare() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-5xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Compare</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Head-to-head intelligence.</h1>
+      <p className="text-lg text-[#555] max-w-2xl leading-relaxed mb-12">
+        Instantly benchmark competitors or analyze historical performance. Redline surfaces structural divergence automatically.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white border border-[#e0e0e0] rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-6">
+            <div className="font-bold text-lg">Peer vs Peer</div>
+            <BarChart2 className="w-5 h-5 text-[#d00]" />
+          </div>
+          <p className="text-[#666] text-sm leading-relaxed">Compare two companies in the same sector to identify margin gaps and strategic differences.</p>
+        </div>
+        <div className="bg-white border border-[#e0e0e0] rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-6">
+            <div className="font-bold text-lg">Quarter vs Quarter</div>
+            <TrendingUp className="w-5 h-5 text-[#d00]" />
+          </div>
+          <p className="text-[#666] text-sm leading-relaxed">Track a single company's evolution across multiple filing periods to spot accelerating trends.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Pricing() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-5xl mx-auto w-full text-center">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Pricing</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Institutional grade. Transparent pricing.</h1>
+      <p className="text-lg text-[#555] max-w-2xl mx-auto leading-relaxed mb-16">
+        Choose the plan that fits your firm's research velocity.
+      </p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div className="bg-white border border-[#e0e0e0] rounded-2xl p-8 shadow-sm flex flex-col">
+          <h3 className="text-xl font-bold text-black mb-2">Analyst</h3>
+          <div className="text-4xl font-bold text-black mb-6">$99<span className="text-lg text-[#666] font-normal">/mo</span></div>
+          <ul className="space-y-4 mb-8 flex-1">
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> 100 Analyses per month</li>
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Standard PDF Exports</li>
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Email Support</li>
+          </ul>
+          <Button className="w-full bg-black text-white hover:bg-gray-800">Start Trial</Button>
+        </div>
+        
+        <div className="bg-black border border-black rounded-2xl p-8 shadow-xl flex flex-col relative transform md:-translate-y-4">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#d00] text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-full">Most Popular</div>
+          <h3 className="text-xl font-bold text-white mb-2">Fund</h3>
+          <div className="text-4xl font-bold text-white mb-6">$499<span className="text-lg text-gray-400 font-normal">/mo</span></div>
+          <ul className="space-y-4 mb-8 flex-1">
+            <li className="flex items-center gap-3 text-gray-300"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Unlimited Analyses</li>
+            <li className="flex items-center gap-3 text-gray-300"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Comparative Engine</li>
+            <li className="flex items-center gap-3 text-gray-300"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> API Access</li>
+            <li className="flex items-center gap-3 text-gray-300"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Priority Support</li>
+          </ul>
+          <Button className="w-full bg-[#d00] text-white hover:bg-[#bb0000]">Get Access</Button>
+        </div>
+        
+        <div className="bg-white border border-[#e0e0e0] rounded-2xl p-8 shadow-sm flex flex-col">
+          <h3 className="text-xl font-bold text-black mb-2">Enterprise</h3>
+          <div className="text-4xl font-bold text-black mb-6">Custom</div>
+          <ul className="space-y-4 mb-8 flex-1">
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Custom Integrations</li>
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> Dedicated Account Manager</li>
+            <li className="flex items-center gap-3 text-[#555]"><div className="w-1.5 h-1.5 rounded-full bg-[#d00]"></div> SSO & Advanced Security</li>
+          </ul>
+          <Button variant="outline" className="w-full border-[#e0e0e0] text-black hover:bg-[#f8f8f8]">Contact Sales</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Research() {
+  return (
+    <div className="flex-1 py-24 px-10 max-w-5xl mx-auto w-full">
+      <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#d00] mb-3">Research</div>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0a0a0a] mb-6">Redline Insights.</h1>
+      <p className="text-lg text-[#555] max-w-2xl leading-relaxed mb-12">
+        Deep dives into market trends, generated entirely by the Redline AI engine.
+      </p>
+      
+      <div className="space-y-6">
+        <a href="#" className="block bg-white border border-[#e0e0e0] rounded-2xl p-6 shadow-sm hover:border-[#d00] transition-colors group">
+          <div className="flex items-center justify-between mb-2">
+            <Badge variant="outline" className="text-[#d00] border-[#d00]/20 bg-[#d00]/5">Payments</Badge>
+            <span className="text-sm text-gray-400">Oct 24, 2025</span>
+          </div>
+          <h3 className="text-xl font-bold text-black mb-2 group-hover:text-[#d00] transition-colors">The Great Yield Compression: PayPal vs Adyen vs Stripe</h3>
+          <p className="text-[#666] leading-relaxed">An analysis of Q3 2025 filings reveals a structural shift in payment processing margins.</p>
+        </a>
+        
+        <a href="#" className="block bg-white border border-[#e0e0e0] rounded-2xl p-6 shadow-sm hover:border-[#d00] transition-colors group">
+          <div className="flex items-center justify-between mb-2">
+            <Badge variant="outline" className="text-[#d00] border-[#d00]/20 bg-[#d00]/5">AI Infrastructure</Badge>
+            <span className="text-sm text-gray-400">Oct 12, 2025</span>
+          </div>
+          <h3 className="text-xl font-bold text-black mb-2 group-hover:text-[#d00] transition-colors">CapEx Signals: Reading the Hyperscaler Tea Leaves</h3>
+          <p className="text-[#666] leading-relaxed">What MSFT, GOOG, and AMZN 10-Qs tell us about the next phase of AI infrastructure buildout.</p>
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -242,18 +411,18 @@ export default function App() {
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-[12px] border-b border-[#f0f0f0] h-[60px] flex items-center justify-between px-10">
-        <a href="#" className="flex items-center gap-[10px] text-none">
+        <Link to="/" className="flex items-center gap-[10px] text-none">
           <div className="w-8 h-8 rounded-[6px] overflow-hidden flex items-center justify-center border border-[#e0e0e0]">
             <img src="https://pbs.twimg.com/profile_images/2039012305313099776/U1Xq-_lh_400x400.jpg" alt="Redline Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
           <span className="text-[18px] font-bold tracking-[-0.5px] text-[#0a0a0a]">Red<span className="text-[#d00]">line</span></span>
-        </a>
+        </Link>
         <nav className="hidden lg:flex gap-[28px]">
-          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Platform</a>
-          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Analysis</a>
-          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Compare</a>
-          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Pricing</a>
-          <a href="#" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Research</a>
+          <Link to="/platform" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Platform</Link>
+          <Link to="/analysis" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Analysis</Link>
+          <Link to="/compare" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Compare</Link>
+          <Link to="/pricing" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Pricing</Link>
+          <Link to="/research" className="text-[13px] text-[#555] no-underline tracking-[0.01em] font-medium transition-colors duration-150 hover:text-[#0a0a0a]">Research</Link>
         </nav>
         <div className="hidden lg:flex items-center gap-[12px]">
           <button onClick={() => setIsSignInOpen(true)} className="text-[13px] font-medium text-[#333] bg-transparent border border-[#e0e0e0] py-[7px] px-[16px] rounded-[8px] cursor-pointer transition-all duration-150 hover:border-[#bbb] hover:bg-[#f8f8f8]">Sign in</button>
@@ -276,11 +445,11 @@ export default function App() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-[60px] left-0 w-full bg-white border-b border-[#f0f0f0] shadow-lg flex flex-col py-4 px-6 gap-4 z-40">
-            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Platform</a>
-            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Analysis</a>
-            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Compare</a>
-            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Pricing</a>
-            <a href="#" className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Research</a>
+            <Link to="/platform" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Platform</Link>
+            <Link to="/analysis" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Analysis</Link>
+            <Link to="/compare" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Compare</Link>
+            <Link to="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Pricing</Link>
+            <Link to="/research" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-gray-800 py-2 border-b border-gray-100">Research</Link>
             <div className="flex flex-col gap-3 mt-2">
               <button onClick={() => { setIsMobileMenuOpen(false); setIsSignInOpen(true); }} className="w-full text-center text-base font-medium text-gray-800 py-3 border border-gray-200 rounded-md">Sign in</button>
               <button onClick={() => { setIsMobileMenuOpen(false); setIsGetAccessOpen(true); }} className="w-full text-center text-base font-bold bg-[#FF2D2D] text-white py-3 rounded-md">Get access</button>
@@ -306,8 +475,11 @@ export default function App() {
         </div>
       </div>
 
-      <main className="flex-grow">
-        {!selectedCompany ? (
+      <main className="flex-grow flex flex-col">
+        <Routes>
+          <Route path="/" element={
+            <>
+              {!selectedCompany ? (
           <>
             {/* Hero Section */}
             <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden">
@@ -1051,6 +1223,14 @@ export default function App() {
             </div>
           </div>
         )}
+            </>
+          } />
+          <Route path="/platform" element={<Platform />} />
+          <Route path="/analysis" element={<Analysis />} />
+          <Route path="/compare" element={<Compare />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/research" element={<Research />} />
+        </Routes>
       </main>
 
       {/* Footer */}
