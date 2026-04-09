@@ -520,16 +520,18 @@ export default function App() {
             {/* Hero Section */}
             <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden">
               {/* Background Video */}
-              <div className="absolute inset-0 w-full h-full z-0">
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className="absolute inset-0 w-full h-full object-cover"
-                >
-                  <source src="https://cdn.coverr.co/videos/coverr-financial-data-on-a-monitor-2518/1080p.mp4" type="video/mp4" />
-                </video>
+              <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+                {/* 
+                  To make an iframe act like 'object-cover', we force a 16:9 aspect ratio 
+                  and ensure it's always at least 100vw wide and 177.77vh (16/9) wide to cover height.
+                */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] min-w-[177.77vh] aspect-video">
+                  <iframe 
+                    src="https://streamable.com/e/rs74si?autoplay=1&mute=1&loop=1&controls=0&nocontrols=1" 
+                    allow="autoplay; fullscreen" 
+                    className="w-full h-full border-none"
+                  ></iframe>
+                </div>
                 {/* White Overlay */}
                 <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
               </div>
