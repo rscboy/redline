@@ -518,7 +518,7 @@ export default function App() {
               {!selectedCompany ? (
           <>
             {/* Hero Section */}
-            <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden">
+            <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden bg-[#f8f8f8]">
               {/* Background Video */}
               <div className="absolute inset-0 w-full h-full z-0">
                 <video 
@@ -526,12 +526,13 @@ export default function App() {
                   loop 
                   muted 
                   playsInline 
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover opacity-40"
+                  poster="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=2000"
                 >
-                  <source src="https://cdn.coverr.co/videos/coverr-financial-data-on-a-monitor-2518/1080p.mp4" type="video/mp4" />
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-financial-trading-dashboard-on-a-monitor-4110-large.mp4" type="video/mp4" />
                 </video>
                 {/* White Overlay */}
-                <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
+                <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
               </div>
 
               <div className="relative z-10">
