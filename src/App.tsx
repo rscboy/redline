@@ -448,8 +448,8 @@ export default function App() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-[12px] border-b border-[#f0f0f0] h-[60px] flex items-center justify-between px-10">
         <Link to="/" className="flex items-center gap-[10px] text-none">
-          <div className="w-8 h-8 rounded-[6px] overflow-hidden flex items-center justify-center border border-[#e0e0e0]">
-            <img src="https://pbs.twimg.com/profile_images/2039012305313099776/U1Xq-_lh_400x400.jpg" alt="Redline Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+          <div className="w-8 h-8 flex items-center justify-center">
+            <img src="https://i.postimg.cc/x8sYdmRx/Redline-Favicon.png" alt="Redline Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
           </div>
           <span className="text-[18px] font-bold tracking-[-0.5px] text-[#0a0a0a]">Red<span className="text-[#d00]">line</span></span>
         </Link>
