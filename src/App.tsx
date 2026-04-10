@@ -1041,33 +1041,6 @@ export default function App() {
               </div>
             </section>
 
-            {/* About the Founder */}
-            <section className="py-24 bg-white border-t border-[#EAEAEA]">
-              <div className="container mx-auto px-6 max-w-5xl">
-                <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                  <div className="w-48 h-48 md:w-64 md:h-64 shrink-0 relative">
-                    <div className="absolute inset-0 bg-[#FF2D2D] rounded-full translate-x-3 translate-y-3"></div>
-                    <img 
-                      src="https://media.licdn.com/dms/image/v2/D5603AQHIH-ojNtjaTQ/profile-displayphoto-shrink_800_800/B56Zv3banFIcAc-/0/1769382719512?e=1777507200&v=beta&t=Yt4I9ctbV-wTL5x7u1AV0DaCVSsT0RgcTyM0y5i8N_8" 
-                      alt="Justin Silverman" 
-                      className="w-full h-full object-cover rounded-full relative z-10 border-4 border-white shadow-xl"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <div className="text-[10px] font-bold tracking-[0.15em] text-[#FF2D2D] uppercase mb-4">About the Founder</div>
-                    <h3 className="text-3xl md:text-4xl font-extrabold text-black mb-6 tracking-tight">Justin Silverman</h3>
-                    <blockquote className="text-xl md:text-2xl text-gray-800 italic leading-relaxed mb-6 border-l-4 border-[#FF2D2D] pl-6 py-2 font-medium">
-                      "You want to see my arm, chief? That's my arm right there, chiefy"
-                    </blockquote>
-                    <p className="text-base text-gray-500 leading-relaxed max-w-lg mx-auto md:mx-0">
-                      Building Redline to bring institutional-grade financial intelligence to everyone. Focused on cutting through the noise of SEC filings to deliver high-signal, actionable insights.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* CTA Section */}
             <section className="py-[100px] px-[40px] bg-[#0a0a0a] text-white text-center">
               <div className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#d00] mb-[20px]">Ready to cut through the noise?</div>
