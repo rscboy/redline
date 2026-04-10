@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Search, FileText, TrendingUp, AlertTriangle, Activity, DollarSign, BarChart2, Zap, Target, Layers, ArrowRight, Download, Loader2 } from 'lucide-react';
 import { searchTickers, getCompanyFilings, getFilingDocument, Ticker, Filing } from './services/sec';
 import { generateAnalysis, generateComparativeAnalysis, AnalysisFilter } from './services/ai';
@@ -519,20 +519,16 @@ export default function App() {
           <>
             {/* Hero Section */}
             <section className="relative pt-20 pb-16 px-10 text-center overflow-hidden bg-[#f8f8f8]">
-              {/* Background Video */}
+              {/* Background Image */}
               <div className="absolute inset-0 w-full h-full z-0">
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className="absolute inset-0 w-full h-full object-cover opacity-40"
-                  poster="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=2000"
-                >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-financial-trading-dashboard-on-a-monitor-4110-large.mp4" type="video/mp4" />
-                </video>
+                <img 
+                  src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=2000" 
+                  alt="Financial Data" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-30"
+                  referrerPolicy="no-referrer"
+                />
                 {/* White Overlay */}
-                <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
+                <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
               </div>
 
               <div className="relative z-10">
@@ -1255,6 +1251,7 @@ export default function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
