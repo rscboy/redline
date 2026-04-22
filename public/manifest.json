@@ -1,0 +1,16 @@
+{
+  "name": "Redline SEC Analysis",
+  "short_name": "Redline",
+  "description": "Institutional-Grade Financial Intelligence & SEC Filing Analysis",
+  "start_url": "/redline/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/x8sYdmRx/Redline-Favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

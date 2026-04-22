@@ -2,18 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Priority Hints & Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    
     <title>SEC Filing Analysis Platform | 10-K & 10-Q Insights in Seconds</title>
     <meta name="description" content="Analyze SEC filings (10-K, 10-Q) in seconds. Extract key insights, detect critical changes, and accelerate equity research with institutional-grade financial intelligence." />
+    
+    <!-- PWA & Icons -->
     <link rel="icon" href="https://i.postimg.cc/x8sYdmRx/Redline-Favicon.png" />
-    <meta property="og:title" content="SEC Filing Analysis Platform | 10-K & 10-Q Insights in Seconds" />
-    <meta property="og:description" content="Analyze SEC filings (10-K, 10-Q) in seconds. Extract key insights, detect critical changes, and accelerate equity research with institutional-grade financial intelligence." />
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/x8sYdmRx/Redline-Favicon.png" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SEC Filing Analysis Platform" />
+    <meta property="og:description" content="Analyze SEC filings (10-K, 10-Q) in seconds. Extract key insights, detect critical changes, and accelerate equity research." />
     <meta property="og:image" content="https://pbs.twimg.com/profile_banners/2039011839967731713/1775065700/1500x500" />
     <meta property="og:url" content="https://rscboy.github.io/redline" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://pbs.twimg.com/profile_banners/2039011839967731713/1775065700/1500x500" />
+
+    <!-- Google Tag Manager / GA4 (Placeholder) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Cloudflare Browser Insights (Placeholder) -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "placeholder-token"}'></script>
+
   </head>
-  <body>
+  <body class="antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

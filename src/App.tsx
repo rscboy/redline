@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Search, FileText, TrendingUp, AlertTriangle, Activity, DollarSign, BarChart2, Zap, Target, Layers, ArrowRight, Download, Loader2 } from 'lucide-react';
+import { Search, FileText, TrendingUp, AlertTriangle, Activity, DollarSign, BarChart2, Zap, Target, Layers, ArrowRight, Download, Loader2, X } from 'lucide-react';
 import { searchTickers, getCompanyFilings, getFilingDocument, Ticker, Filing } from './services/sec';
 import { generateAnalysis, generateComparativeAnalysis, AnalysisFilter } from './services/ai';
+import * as Dialog from '@radix-ui/react-dialog';
+import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './components/ui/card';
@@ -246,6 +249,17 @@ export default function App() {
   const [isGetAccessOpen, setIsGetAccessOpen] = useState(false);
   
   const reportRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current.children,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power2.out" }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -531,7 +545,7 @@ export default function App() {
                 <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10" ref={heroRef}>
                 <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#FF2D2D] bg-[#fff0f0] border border-[#ffd5d5] px-3 py-1.5 rounded-full mb-6">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#FF2D2D] animate-pulse"></div>
                   SEC EDGAR · Live Filing Intelligence
@@ -1263,92 +1277,130 @@ export default function App() {
         }
       `}} />
 
-      {/* Sign In Modal */}
-      {isSignInOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <button 
-              onClick={() => setIsSignInOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div className="text-center mb-8">
-              <div className="w-12 h-12 bg-[#FF2D2D] rounded-xl mx-auto mb-4 flex items-center justify-center">
-                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-                  <path d="M3 15L9 3L15 15H11L9 11L7 15H3Z" fill="white"/>
-                  <path d="M6 15L9 9L12 15" fill="rgba(255,255,255,0.4)"/>
-                </svg>
+      {/* Sign In Modal (Radix UI + Framer Motion) */}
+      <Dialog.Root open={isSignInOpen} onOpenChange={setIsSignInOpen}>
+        <AnimatePresence>
+          {isSignInOpen && (
+            <Dialog.Portal forceMount>
+              <Dialog.Overlay asChild>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm" 
+                />
+              </Dialog.Overlay>
+              <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-none">
+                <Dialog.Content asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative pointer-events-auto"
+                  >
+                    <Dialog.Close className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#FF2D2D] rounded-sm">
+                      <X className="w-6 h-6" />
+                    </Dialog.Close>
+                    <div className="text-center mb-8">
+                      <div className="w-12 h-12 bg-[#FF2D2D] rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg shadow-[#FF2D2D]/20">
+                        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
+                          <path d="M3 15L9 3L15 15H11L9 11L7 15H3Z" fill="white"/>
+                          <path d="M6 15L9 9L12 15" fill="rgba(255,255,255,0.4)"/>
+                        </svg>
+                      </div>
+                      <Dialog.Title className="text-2xl font-bold text-black mb-2 tracking-tight">Welcome back</Dialog.Title>
+                      <Dialog.Description className="text-sm text-gray-500">Sign in to your Redline account</Dialog.Description>
+                    </div>
+                    <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsSignInOpen(false); }}>
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Email</label>
+                        <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="name@company.com" />
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">Password</label>
+                          <a href="#" className="text-xs text-[#FF2D2D] font-medium hover:underline">Forgot?</a>
+                        </div>
+                        <input type="password" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="••••••••" />
+                      </div>
+                      <button type="submit" className="w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors mt-2">
+                        Sign In
+                      </button>
+                    </form>
+                    <div className="mt-6 text-center text-sm text-gray-500">
+                      Don't have an account? <button onClick={() => { setIsSignInOpen(false); setIsGetAccessOpen(true); }} className="text-black font-bold hover:underline outline-none focus-visible:ring-2 focus-visible:ring-[#FF2D2D] rounded-sm">Get access</button>
+                    </div>
+                  </motion.div>
+                </Dialog.Content>
               </div>
-              <h2 className="text-2xl font-bold text-black mb-2 tracking-tight">Welcome back</h2>
-              <p className="text-sm text-gray-500">Sign in to your Redline account</p>
-            </div>
-            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsSignInOpen(false); }}>
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Email</label>
-                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="name@company.com" />
-              </div>
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">Password</label>
-                  <a href="#" className="text-xs text-[#FF2D2D] font-medium hover:underline">Forgot?</a>
-                </div>
-                <input type="password" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="••••••••" />
-              </div>
-              <button type="submit" className="w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors mt-2">
-                Sign In
-              </button>
-            </form>
-            <div className="mt-6 text-center text-sm text-gray-500">
-              Don't have an account? <button onClick={() => { setIsSignInOpen(false); setIsGetAccessOpen(true); }} className="text-black font-bold hover:underline">Get access</button>
-            </div>
-          </div>
-        </div>
-      )}
+            </Dialog.Portal>
+          )}
+        </AnimatePresence>
+      </Dialog.Root>
 
-      {/* Get Access Modal */}
-      {isGetAccessOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <button 
-              onClick={() => setIsGetAccessOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-black mb-2 tracking-tight">Request Access</h2>
-              <p className="text-sm text-gray-500">Join leading analysts using Redline.</p>
-            </div>
-            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsGetAccessOpen(false); }}>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">First Name</label>
-                  <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Jane" />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Last Name</label>
-                  <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Doe" />
-                </div>
+      {/* Get Access Modal (Radix UI + Framer Motion) */}
+      <Dialog.Root open={isGetAccessOpen} onOpenChange={setIsGetAccessOpen}>
+        <AnimatePresence>
+          {isGetAccessOpen && (
+            <Dialog.Portal forceMount>
+              <Dialog.Overlay asChild>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm" 
+                />
+              </Dialog.Overlay>
+              <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-none">
+                <Dialog.Content asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    className="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative pointer-events-auto"
+                  >
+                    <Dialog.Close className="absolute top-4 right-4 text-gray-400 hover:text-black transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#FF2D2D] rounded-sm">
+                      <X className="w-6 h-6" />
+                    </Dialog.Close>
+                    <div className="text-center mb-8">
+                      <Dialog.Title className="text-3xl font-bold text-black mb-2 tracking-tight">Request Access</Dialog.Title>
+                      <Dialog.Description className="text-sm text-gray-500">Join leading analysts using Redline.</Dialog.Description>
+                    </div>
+                    <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsGetAccessOpen(false); }}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">First Name</label>
+                          <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Jane" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Last Name</label>
+                          <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Doe" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Work Email</label>
+                        <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="jane@fund.com" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Company</label>
+                        <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Acme Capital" />
+                      </div>
+                      <button type="submit" className="w-full bg-[#FF2D2D] text-white font-bold py-3.5 rounded-xl hover:bg-[#d00] transition-colors mt-2">
+                        Request Early Access
+                      </button>
+                    </form>
+                    <div className="mt-6 text-center text-xs text-gray-400">
+                      By requesting access, you agree to our Terms of Service and Privacy Policy.
+                    </div>
+                  </motion.div>
+                </Dialog.Content>
               </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Work Email</label>
-                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="jane@fund.com" />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Company</label>
-                <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF2D2D] focus:ring-2 focus:ring-[#FF2D2D]/20 outline-none transition-all" placeholder="Acme Capital" />
-              </div>
-              <button type="submit" className="w-full bg-[#FF2D2D] text-white font-bold py-3.5 rounded-xl hover:bg-[#d00] transition-colors mt-2">
-                Request Early Access
-              </button>
-            </form>
-            <div className="mt-6 text-center text-xs text-gray-400">
-              By requesting access, you agree to our Terms of Service and Privacy Policy.
-            </div>
-          </div>
-        </div>
-      )}
+            </Dialog.Portal>
+          )}
+        </AnimatePresence>
+      </Dialog.Root>
       {/* Social Links Widget */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
         <a href="https://x.com/redlineapp" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[#e0e0e0] text-[#555] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-black hover:text-white hover:border-black transition-all duration-200 hover:-translate-y-1">
