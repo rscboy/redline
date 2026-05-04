@@ -230,7 +230,85 @@ function Terms() {
   );
 }
 
+function SplashScreen({ onComplete }: { onComplete: () => void }) {
+  useEffect(() => {
+    // Completes splash animation sequence after 3.2s
+    const timer = setTimeout(onComplete, 3200);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <motion.div 
+      className="fixed inset-0 z-[99999] bg-[#050505] flex items-center justify-center overflow-hidden"
+      exit={{ opacity: 0, filter: "blur(10px)" }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    >
+      {/* Subtle grid background for the financial terminal vibe */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      
+      {/* Glow effect radiating from center */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#FF2D2D] rounded-full blur-[120px] opacity-10"></div>
+      
+      <div className="relative w-[300px] h-[200px] flex items-center justify-center">
+         {/* The SVG Ticker Chart */}
+         <motion.svg 
+           viewBox="0 0 300 200" 
+           className="absolute inset-0 w-full h-full pointer-events-none"
+           initial={{ opacity: 1 }}
+           animate={{ opacity: 0 }}
+           transition={{ delay: 1.3, duration: 0.3 }}
+         >
+            <defs>
+              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#FF2D2D" stopOpacity="0" />
+                <stop offset="30%" stopColor="#FF2D2D" stopOpacity="1" />
+                <stop offset="100%" stopColor="#ff4d4d" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+           <motion.path
+             // The breakout path tracing to the exact center (150, 100)
+             d="M -30 180 L 10 140 L 40 160 L 70 80 L 110 120 L 120 150 L 150 100"
+             fill="none"
+             stroke="url(#lineGrad)"
+             strokeWidth="3.5"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+             initial={{ pathLength: 0 }}
+             animate={{ pathLength: 1 }}
+             transition={{ duration: 1.1, ease: "easeInOut" }}
+           />
+         </motion.svg>
+
+         {/* The Morph / Logo Reveal */}
+         <motion.div 
+           className="absolute flex items-center"
+           style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', gap: '0px' }}
+         >
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.5, type: "spring", stiffness: 300, damping: 20 }}
+              className="w-[48px] h-[48px] bg-white rounded-[12px] flex items-center justify-center border border-[#e0e0e0] shadow-[0_0_40px_rgba(255,45,45,0.4)] z-20 shrink-0"
+            >
+              <img src="https://i.postimg.cc/x8sYdmRx/Redline-Favicon.png" alt="Redline Logo" className="w-[32px] h-[32px] object-contain" referrerPolicy="no-referrer" />
+            </motion.div>
+            
+            <motion.div
+              initial={{ width: 0, opacity: 0, marginLeft: 0 }}
+              animate={{ width: "auto", opacity: 1, marginLeft: 14 }}
+              transition={{ delay: 1.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[40px] font-bold tracking-[-1.5px] text-white overflow-hidden whitespace-nowrap z-10"
+            >
+              Red<span className="text-[#FF2D2D]">line</span>
+            </motion.div>
+         </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Ticker[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -458,8 +536,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col">
-      {/* Header */}
+    <>
+      <AnimatePresence>
+        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      </AnimatePresence>
+
+      <div className={`min-h-screen bg-white text-black font-sans selection:bg-[#FF2D2D]/20 flex flex-col ${showSplash ? 'h-screen overflow-hidden' : ''}`}>
+        {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-[12px] border-b border-[#f0f0f0] h-[60px] flex items-center justify-between px-10">
         <Link to="/" className="flex items-center gap-[10px] text-none">
           <div className="w-8 h-8 flex items-center justify-center">
@@ -1414,6 +1497,7 @@ export default function App() {
         </a>
       </div>
     </div>
+    </>
   );
 }
 
