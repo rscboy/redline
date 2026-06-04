@@ -643,7 +643,7 @@ export default function App() {
                   Redline integrates directly with SEC EDGAR to deliver high-signal, insight-dense analysis of 10-K and 10-Q filings in under 60 seconds.
                 </p>
                 
-                <div className="max-w-[600px] mx-auto mb-4 relative">
+                <div className="max-w-[600px] mx-auto mb-4 relative z-50">
                   <div className="absolute left-[18px] top-1/2 -translate-y-1/2 text-[#999] pointer-events-none">
                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
                       <circle cx="7.5" cy="7.5" r="5.5" stroke="#aaa" strokeWidth="1.5"/>
