@@ -41,6 +41,21 @@
 
   </head>
   <body class="antialiased">
+    <div id="error-log" style="position:fixed; bottom:0; left:0; width:100%; background:rgba(255,0,0,0.8); color:white; z-index:999999; display:none; padding:10px; white-space:pre-wrap; font-family:monospace; font-size: 12px;"></div>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        if (message.includes('WebSocket')) return;
+        var log = document.getElementById('error-log');
+        log.style.display = 'block';
+        log.textContent += message + ' (' + lineno + ':' + colno + ')\n';
+      };
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && (event.reason.message && event.reason.message.includes('WebSocket')) || String(event.reason).includes('WebSocket')) return;
+        var log = document.getElementById('error-log');
+        log.style.display = 'block';
+        log.textContent += event.reason + '\n';
+      });
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
